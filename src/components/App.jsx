@@ -1,7 +1,8 @@
-import React from 'react';
+import "../styles/index.scss";
 
 const App = () => {
     return (<>
+            <section className="header"></section>
             <h1>Hello world!</h1>
         </>
     );
