@@ -41,6 +41,9 @@
 .movie-image:hover + .movie-options {
   display: block;
 }
+.movie-options:hover {
+  display: block;
+}
 .movie-heading {
   font-size: 18px;
   line-height: 22px;
