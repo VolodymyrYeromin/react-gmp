@@ -49,13 +49,17 @@
   line-height: 22px;
   display: flex;
   justify-content: space-between;
-  opacity: 0.7;
   margin-top: 10px;
 }
 .movie-name {
+  opacity: 0.7;
   cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
 }
 .movie-year {
+  opacity: 0.7;
   padding: 5px 8px;
   border: 1px solid #979797;
   border-radius: 4px;
