@@ -2,6 +2,11 @@
 
 body {
   margin: 0;
-  color: var(--text);
-  font-size: 48px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  background-color: var(--body);
+  font-size: 20px;
+}
+a {
+  text-decoration: none;
 }

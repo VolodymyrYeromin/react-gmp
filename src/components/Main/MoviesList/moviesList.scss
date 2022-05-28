@@ -1,0 +1,15 @@
+.total-movies {
+  color: var(--white);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 24px 0;
+  span {
+    font-weight: 600;
+  }
+}
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
