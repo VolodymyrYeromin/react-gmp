@@ -1,16 +1,22 @@
-import mockMovies from "../../data/mockData";
+import React from "react";
 
-const ErrorBoundary = (props) => {
-    const ErrorText = () => {
-        return(
-            <h2 className="error-message">Oops, something went wrong... We are doing our best to fix the issue</h2>
-        )
+class ErrorBoundary extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { hasError: false };
     }
-    return (
-        <>
-            {Array.isArray(mockMovies)? props.children : <ErrorText />}
-        </>
-    )
+
+    static getDerivedStateFromError(error) {
+        return { hasError: true };
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return <h2 className="error-message">Oops, something went wrong... We are doing our best to fix this issue</h2>;
+        }
+
+        return this.props.children;
+    }
 }
 
 export default ErrorBoundary;
