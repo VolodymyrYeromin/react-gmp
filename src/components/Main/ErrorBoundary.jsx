@@ -10,6 +10,10 @@ class ErrorBoundary extends React.Component {
         return { hasError: true };
     }
 
+    componentDidCatch(error, errorInfo) {
+        console.error(error, errorInfo);
+    }
+
     render() {
         if (this.state.hasError) {
             return <h2 className="error-message">Oops, something went wrong... We are doing our best to fix this issue</h2>;
