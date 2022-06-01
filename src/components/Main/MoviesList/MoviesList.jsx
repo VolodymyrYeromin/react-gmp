@@ -1,5 +1,6 @@
 import './moviesList.scss';
 import MovieCard from "./MovieCard/MovieCard";
+import PropTypes from "prop-types";
 
 const MoviesList = ({movies}) => {
     return (
@@ -15,4 +16,14 @@ const MoviesList = ({movies}) => {
         </>
     )
 }
+
+MoviesList.propTypes = {
+    movies: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
+        genre: PropTypes.string.isRequired,
+        imageUrl: PropTypes.string.isRequired,
+    }))
+};
+
 export default MoviesList;

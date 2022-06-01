@@ -1,4 +1,5 @@
 import "./movieCard.scss";
+import PropTypes from "prop-types";
 
 const MovieCard = ({movie}) => {
     return (
@@ -17,5 +18,14 @@ const MovieCard = ({movie}) => {
         </div>
     )
 }
+
+MovieCard.propTypes = {
+    movie: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
+        genre: PropTypes.string.isRequired,
+        imageUrl: PropTypes.string.isRequired,
+    })
+};
 
 export default MovieCard;
