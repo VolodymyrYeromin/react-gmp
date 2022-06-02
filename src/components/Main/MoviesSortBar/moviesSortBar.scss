@@ -1,0 +1,55 @@
+.movies-sort-bar {
+  padding-top: 20px;
+  display: flex;
+  .select_box{
+    width: 200px;
+    overflow: hidden;
+    position: relative;
+    &:after {
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #f00;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      content: "";
+      z-index: 98;
+    }
+    select {
+      margin-left: 30px;
+      font-size: 16px;
+      line-height: 20px;
+      color: var(--white);
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 500;
+      width: 150px;
+      border: 0;
+      position: relative;
+      z-index: 99;
+      background: none;
+      -webkit-appearance: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    option {
+      font-weight: 500;
+      background-color: var(--body);
+      color: var(--white);
+      text-transform: uppercase;
+    }
+  }
+  span {
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    opacity: 0.6;
+    padding-top: 3px;
+  }
+}
+
