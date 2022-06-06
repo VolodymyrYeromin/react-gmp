@@ -1,15 +1,21 @@
 import "./movieCard.scss";
 import PropTypes from "prop-types";
+import {useState} from "react";
+import EditDeleteWindow from "../../../EditDeleteWindow/EditDeleteWindow";
 
 const MovieCard = ({movie}) => {
+    const [showWindow, setShowWindow] = useState(false)
     return (
         <div className="movie-card">
             <img className="movie-image" src={movie.url} alt={movie.title} />
-            <div className="movie-options">
+            <div className="movie-options" onClick={() => {
+                setShowWindow(true)
+            }} >
                 <div className="options-dot"></div>
                 <div className="options-dot"></div>
                 <div className="options-dot"></div>
             </div>
+            <EditDeleteWindow showWindow={showWindow} onClose={() => setShowWindow(false)} />
             <div className="movie-heading">
                 <span className="movie-name">{movie.title}</span>
                 <span className="movie-year">{movie.date}</span>
