@@ -6,6 +6,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import PropTypes from "prop-types";
 
 const Main = ({movies}) => {
+    console.log(movies);
     return (
         <main>
             <div className="main-heading">
@@ -21,10 +22,13 @@ const Main = ({movies}) => {
 
 Main.propTypes = {
     movies: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        year: PropTypes.number.isRequired,
-        genre: PropTypes.string.isRequired,
-        imageUrl: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
     }))
 };
 

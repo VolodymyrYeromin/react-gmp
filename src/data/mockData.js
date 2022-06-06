@@ -7,40 +7,58 @@ import img6 from "../assets/reservoirdogs.png"
 
 const mockMovies = [
     {
-        name: "Pulp Fiction",
-        year: 2004,
-        genre: "Action & Adventure",
-        imageUrl: img1,
+        title: 'Pulp Fiction',
+        date: 2004,
+        url: img1,
+        rating: '7',
+        genres: ['Action & Adventure'],
+        runtime: '7',
+        overview: 'Yo'
     },
     {
-        name: "Bohemian Rhapsody",
-        year: 2003,
-        genre: "Drama, Biography, Music",
-        imageUrl: img2,
+        title: 'Bohemian Rhapsody',
+        date: 2003,
+        url: img2,
+        rating: '7',
+        genres: ['Drama', 'Biography', 'Music'],
+        runtime: '7',
+        overview: 'Yo'
     },
     {
-        name: "Kill Bill: Vol 2",
-        year: 1994,
-        genre: "Oscar winning Movie",
-        imageUrl: img3,
+        title: 'Kill Bill: Vol 2',
+        date: 1994,
+        url: img3,
+        rating: '7',
+        genres: ['Oscar winning Movie'],
+        runtime: '7',
+        overview: 'Yo'
     },
     {
-        name: "Avengers: War of Infinity",
-        year: 2004,
-        genre: "Action & Adventure",
-        imageUrl: img4,
+        title: 'Avengers: War of Infinity',
+        date: 2004,
+        url: img4,
+        rating: '7',
+        genres: ['Action & Adventure'],
+        runtime: '7',
+        overview: 'Yo'
     },
     {
-        name: "Inception",
-        year: 2003,
-        genre: "Action & Adventure",
-        imageUrl: img5,
+        title: 'Inception',
+        date: 2003,
+        url: img5,
+        rating: '7',
+        genres: ['Action & Adventure'],
+        runtime: '7',
+        overview: 'Yo'
     },
     {
-        name: "Reservoir dogs",
-        year: 1994,
-        genre: "Oscar winning Movie",
-        imageUrl: img6,
+        title: 'Reservoir dogs',
+        date: 1994,
+        url: img6,
+        rating: '7',
+        genres: ['Oscar winning Movie'],
+        runtime: '7',
+        overview: 'Yo'
     },
 ]
 
