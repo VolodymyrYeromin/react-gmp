@@ -3,18 +3,24 @@ import {Link} from "react-router-dom";
 import SearchBar from "./SearchBar/SearchBar";
 import AddMovieModal from "../AddMovieModal/AddMovieModal";
 import {useState} from "react";
+import CongratulationsModal from "../CongratulationsModal/CongratulationsModal";
 
 const Header = ({moviesState, setMoviesState}) => {
     const [showModal, setShowModal] = useState(false);
+    const [showCongratulationsModal, setShowCongratulationsModal] = useState(false);
 
-    return(
+    return (
         <header>
             <div className="header-top">
                 <Link to="/" className="logo"><span className="bold">netflix</span>roulette</Link>
-                <button className="add-movie-btn" onClick={()=>setShowModal(true)}>+ Add movie</button>
+                <button className="add-movie-btn" onClick={() => setShowModal(true)}>+ Add movie</button>
             </div>
-            <SearchBar />
-            <AddMovieModal moviesState={moviesState} setMoviesState={setMoviesState} onClose={()=> setShowModal(false)} showModal={showModal}/>
+            <SearchBar/>
+            <AddMovieModal moviesState={moviesState} setMoviesState={setMoviesState} onClose={() => setShowModal(false)}
+                           showModal={showModal}
+                           onSuccess={() => setShowCongratulationsModal(true)}/>
+            <CongratulationsModal showCongratulationsModal={showCongratulationsModal}
+                                  onClose={() => setShowCongratulationsModal(false)}/>
         </header>
     )
 };

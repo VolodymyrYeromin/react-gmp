@@ -13,26 +13,23 @@ const theme = createTheme({
     },
 });
 
-const EditMovieModal = ({showModal, onClose, moviesState, setMoviesState}) => {
-    if (!showModal) {
+const EditMovieModal = ({movie, showEditModal, onClose, index, moviesState, setMoviesState, closeEditWindow}) => {
+    if (!showEditModal) {
         return null;
     }
-    const [form, setForm] = useState({
-        title: '',
-        date: null,
-        url: '',
-        rating: '',
-        genres: [],
-        runtime: '',
-        overview: ''
-    })
+    const [form, setForm] = useState(movie)
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formattedForm = {...form, date: form.date.getFullYear()}
-        setMoviesState(() => [...moviesState, formattedForm]);
+        const transformedDate = typeof form.date === "number" ? form.date : form.date.getFullYear();
+        const formattedForm = {...form, date: transformedDate};
+        const newState = [...moviesState];
+        newState[index] = formattedForm;
+        setMoviesState(newState);
         onClose();
+        closeEditWindow();
     }
+
     return (
         <div className="overlay">
             <div className="modal-window">

@@ -13,7 +13,7 @@ const theme = createTheme({
     },
 });
 
-const AddMovieModal = ({showModal, onClose, moviesState, setMoviesState}) => {
+const AddMovieModal = ({showModal, onClose, moviesState, setMoviesState, onSuccess}) => {
     if (!showModal) {
         return null;
     }
@@ -32,6 +32,7 @@ const AddMovieModal = ({showModal, onClose, moviesState, setMoviesState}) => {
         const formattedForm = {...form, date: form.date.getFullYear()}
         setMoviesState(() => [...moviesState, formattedForm]);
         onClose();
+        onSuccess();
     }
     return (
         <div className="overlay">

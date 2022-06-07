@@ -5,8 +5,7 @@ import MoviesList from "./MoviesList/MoviesList";
 import ErrorBoundary from "./ErrorBoundary";
 import PropTypes from "prop-types";
 
-const Main = ({movies}) => {
-    console.log(movies);
+const Main = ({movies, setMoviesState}) => {
     return (
         <main>
             <div className="main-heading">
@@ -14,7 +13,7 @@ const Main = ({movies}) => {
                 <MoviesSortBar />
             </div>
             <ErrorBoundary>
-                <MoviesList movies={movies} />
+                <MoviesList movies={movies} setMoviesState={setMoviesState} />
             </ErrorBoundary>
         </main>
     )

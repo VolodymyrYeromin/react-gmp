@@ -9,7 +9,7 @@ export default function BasicDatePicker({form, callback}) {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
                 label="Release date"
-                value={form.date}
+                value={typeof form.date === "number" ? new Date(form.date, 0) : form.date}
                 onChange={(newValue) => {
                     callback({...form, date:newValue});
                 }}
