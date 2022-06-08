@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import AddMovieModal from "../AddMovieModal/AddMovieModal";
 import {useState} from "react";
 import CongratulationsModal from "../CongratulationsModal/CongratulationsModal";
+import PropTypes from "prop-types";
 
 const Header = ({moviesState, setMoviesState}) => {
     const [showModal, setShowModal] = useState(false);
@@ -23,6 +24,19 @@ const Header = ({moviesState, setMoviesState}) => {
                                   onClose={() => setShowCongratulationsModal(false)}/>
         </header>
     )
+};
+
+Header.propTypes = {
+    moviesState: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
+    })),
+    setMoviesState: PropTypes.func.isRequired
 };
 
 export default Header;

@@ -4,6 +4,7 @@ import {TextField, ThemeProvider} from "@mui/material";
 import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import {createTheme} from '@mui/material/styles';
 import {useState} from "react";
+import PropTypes from "prop-types";
 
 const theme = createTheme({
     palette: {
@@ -69,6 +70,22 @@ const AddMovieModal = ({showModal, onClose, moviesState, setMoviesState, onSucce
             </div>
         </div>
     );
+};
+
+AddMovieModal.propTypes = {
+    moviesState: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
+    })),
+    setMoviesState: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+    showModal: PropTypes.bool.isRequired,
+    onSuccess: PropTypes.func.isRequired,
 };
 
 export default AddMovieModal;

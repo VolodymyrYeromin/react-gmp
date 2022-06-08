@@ -26,7 +26,8 @@ MoviesList.propTypes = {
         rating: PropTypes.string.isRequired,
         runtime: PropTypes.string.isRequired,
         overview: PropTypes.string.isRequired
-    }))
+    })),
+    setMoviesState: PropTypes.func.isRequired
 };
 
 export default MoviesList;

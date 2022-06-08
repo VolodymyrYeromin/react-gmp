@@ -2,6 +2,7 @@ import './editDeleteWindow.scss'
 import {useState} from "react";
 import EditMovieModal from "../EditMovieModal/EditMovieModal";
 import DeleteMovieModal from "../DeleteMovieModal/DeleteMovieModal";
+import PropTypes from "prop-types";
 
 const EditDeleteWindow = ({showWindow, onClose, movie, index, moviesState, setMoviesState}) => {
     if (!showWindow) {
@@ -33,6 +34,31 @@ const EditDeleteWindow = ({showWindow, onClose, movie, index, moviesState, setMo
                               showDeleteModal={showDeleteModal} closeDeleteWindow={onClose} onClose={() => setShowDeleteModal(false)}/>
         </div>
     );
+};
+
+EditDeleteWindow.propTypes = {
+    movie: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
+    }),
+    index: PropTypes.number.isRequired,
+    moviesState: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
+    })),
+    setMoviesState: PropTypes.func.isRequired,
+    showWindow: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
 };
 
 export default EditDeleteWindow;

@@ -1,4 +1,5 @@
 import "./CongratulationsModal.scss";
+import PropTypes from "prop-types";
 
 const CongratulationsModal = ({onClose, showCongratulationsModal}) => {
     if (!showCongratulationsModal) {
@@ -22,5 +23,10 @@ const CongratulationsModal = ({onClose, showCongratulationsModal}) => {
         </div>
     );
 };
+
+CongratulationsModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    showCongratulationsModal: PropTypes.bool.isRequired
+}
 
 export default CongratulationsModal;

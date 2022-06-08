@@ -10,7 +10,7 @@ const Main = ({movies, setMoviesState}) => {
         <main>
             <div className="main-heading">
                 <MoviesFilterBar />
-                <MoviesSortBar />
+                <MoviesSortBar movies={movies} setMoviesState={setMoviesState} />
             </div>
             <ErrorBoundary>
                 <MoviesList movies={movies} setMoviesState={setMoviesState} />
@@ -28,7 +28,8 @@ Main.propTypes = {
         rating: PropTypes.string.isRequired,
         runtime: PropTypes.string.isRequired,
         overview: PropTypes.string.isRequired
-    }))
+    })),
+    setMoviesState: PropTypes.func.isRequired
 };
 
 export default Main;

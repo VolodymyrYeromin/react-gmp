@@ -4,6 +4,7 @@ import {TextField, ThemeProvider} from "@mui/material";
 import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import {createTheme} from '@mui/material/styles';
 import {useState} from "react";
+import PropTypes from "prop-types";
 
 const theme = createTheme({
     palette: {
@@ -65,6 +66,32 @@ const EditMovieModal = ({movie, showEditModal, onClose, index, moviesState, setM
             </div>
         </div>
     );
+};
+
+EditMovieModal.propTypes = {
+    movie: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
+    }),
+    index: PropTypes.number.isRequired,
+    moviesState: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
+    })),
+    setMoviesState: PropTypes.func.isRequired,
+    closeEditWindow: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+    showEditModal: PropTypes.bool.isRequired,
 };
 
 export default EditMovieModal;

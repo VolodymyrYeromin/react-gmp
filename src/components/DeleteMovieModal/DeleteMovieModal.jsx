@@ -1,4 +1,5 @@
 import "./deleteMovieModal.scss";
+import PropTypes from "prop-types";
 
 const DeleteMovieModal = ({showDeleteModal, onClose, index, moviesState, setMoviesState, closeDeleteWindow}) => {
     if (!showDeleteModal) {
@@ -27,6 +28,23 @@ const DeleteMovieModal = ({showDeleteModal, onClose, index, moviesState, setMovi
             </div>
         </div>
     );
+};
+
+DeleteMovieModal.propTypes = {
+    index: PropTypes.number.isRequired,
+    moviesState: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
+    })),
+    setMoviesState: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+    closeDeleteWindow: PropTypes.func.isRequired,
+    showDeleteModal: PropTypes.bool.isRequired,
 };
 
 export default DeleteMovieModal;

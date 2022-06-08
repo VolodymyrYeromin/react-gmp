@@ -37,7 +37,18 @@ MovieCard.propTypes = {
         rating: PropTypes.string.isRequired,
         runtime: PropTypes.string.isRequired,
         overview: PropTypes.string.isRequired
-    })
+    }),
+    index: PropTypes.number.isRequired,
+    moviesState: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
+    })),
+    setMoviesState: PropTypes.func.isRequired
 };
 
 export default MovieCard;

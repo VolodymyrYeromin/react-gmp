@@ -10,7 +10,7 @@ const mockMovies = [
         title: 'Pulp Fiction',
         date: 2004,
         url: img1,
-        rating: '7',
+        rating: '1',
         genres: ['Action & Adventure'],
         runtime: '7',
         overview: 'Yo'
@@ -19,7 +19,7 @@ const mockMovies = [
         title: 'Bohemian Rhapsody',
         date: 2003,
         url: img2,
-        rating: '7',
+        rating: '2',
         genres: ['Drama', 'Biography', 'Music'],
         runtime: '7',
         overview: 'Yo'
@@ -28,7 +28,7 @@ const mockMovies = [
         title: 'Kill Bill: Vol 2',
         date: 1994,
         url: img3,
-        rating: '7',
+        rating: '3',
         genres: ['Oscar winning Movie'],
         runtime: '7',
         overview: 'Yo'
@@ -37,7 +37,7 @@ const mockMovies = [
         title: 'Avengers: War of Infinity',
         date: 2004,
         url: img4,
-        rating: '7',
+        rating: '4',
         genres: ['Action & Adventure'],
         runtime: '7',
         overview: 'Yo'
@@ -46,7 +46,7 @@ const mockMovies = [
         title: 'Inception',
         date: 2003,
         url: img5,
-        rating: '7',
+        rating: '5',
         genres: ['Action & Adventure'],
         runtime: '7',
         overview: 'Yo'
@@ -55,7 +55,7 @@ const mockMovies = [
         title: 'Reservoir dogs',
         date: 1994,
         url: img6,
-        rating: '7',
+        rating: '6',
         genres: ['Oscar winning Movie'],
         runtime: '7',
         overview: 'Yo'
