@@ -4,15 +4,20 @@ import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import PropTypes from "prop-types";
 import {useState} from "react";
+import ClickedMovieDetails from "./components/ClickedMovieDetails/ClickedMovieDetails";
+import {MovieDetailsProvider} from "./components/ClickedMovieDetails/MovieDetailsContext";
 
 const App = ({movies}) => {
     const [moviesState, setMoviesState] = useState(movies);
+    const [selectedMovie, setSelectedMovie] = useState({});
+
     return (
-        <>
+        <MovieDetailsProvider>
             <Header moviesState={moviesState} setMoviesState={setMoviesState}/>
-            <Main movies={moviesState} setMoviesState={setMoviesState}/>
+            <ClickedMovieDetails selectedMovie={selectedMovie} />
+            <Main movies={moviesState} setMoviesState={setMoviesState} setSelectedMovie={setSelectedMovie}/>
             <Footer />
-        </>
+        </MovieDetailsProvider>
     );
 };
 

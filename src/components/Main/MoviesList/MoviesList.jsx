@@ -2,14 +2,14 @@ import './moviesList.scss';
 import MovieCard from "./MovieCard/MovieCard";
 import PropTypes from "prop-types";
 
-const MoviesList = ({movies, setMoviesState}) => {
+const MoviesList = ({movies, setMoviesState, setSelectedMovie}) => {
     return (
         <>
             <div className="total-movies"><span>{movies.length}</span> movies found</div>
             <div className="movies-list">
                 {movies.map((movie, index)=> {
                     return (
-                        <MovieCard key={index} movie={movie} index={index} moviesState={movies} setMoviesState={setMoviesState} />
+                        <MovieCard key={index} movie={movie} index={index} moviesState={movies} setMoviesState={setMoviesState} setSelectedMovie={setSelectedMovie} />
                     )
                 })}
             </div>

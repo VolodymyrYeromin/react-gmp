@@ -2,12 +2,18 @@ import "./movieCard.scss";
 import PropTypes from "prop-types";
 import {useState} from "react";
 import EditDeleteWindow from "../../../EditDeleteWindow/EditDeleteWindow";
+import {useMovieDetailsPage} from "../../../ClickedMovieDetails/MovieDetailsContext";
 
-const MovieCard = ({movie, index, moviesState, setMoviesState}) => {
+const MovieCard = ({movie, index, moviesState, setMoviesState, setSelectedMovie}) => {
     const [showWindow, setShowWindow] = useState(false)
+    const {showDetailsPage} = useMovieDetailsPage()
+
     return (
         <div className="movie-card">
-            <img className="movie-image" src={movie.url} alt={movie.title}/>
+            <img className="movie-image" src={movie.url} alt={movie.title} onClick={() => {
+                setSelectedMovie(movie);
+                showDetailsPage();
+            }}/>
             <div className="movie-options" onClick={() => {
                 setShowWindow(true)
             }}>
@@ -18,7 +24,10 @@ const MovieCard = ({movie, index, moviesState, setMoviesState}) => {
             <EditDeleteWindow showWindow={showWindow} onClose={() => setShowWindow(false)} movie={movie}
                               moviesState={moviesState} setMoviesState={setMoviesState} index={index}/>
             <div className="movie-heading">
-                <span className="movie-name">{movie.title}</span>
+                <span className="movie-name" onClick={() => {
+                    setSelectedMovie(movie);
+                    showDetailsPage();
+                }}>{movie.title}</span>
                 <span className="movie-year">{movie.date}</span>
             </div>
             <span className="movie-genres">{movie.genres.map((genre, index) => {
