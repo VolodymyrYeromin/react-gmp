@@ -57,7 +57,8 @@ MovieCard.propTypes = {
         runtime: PropTypes.string.isRequired,
         overview: PropTypes.string.isRequired
     })),
-    setMoviesState: PropTypes.func.isRequired
+    setMoviesState: PropTypes.func.isRequired,
+    setSelectedMovie: PropTypes.func.isRequired
 };
 
 export default MovieCard;

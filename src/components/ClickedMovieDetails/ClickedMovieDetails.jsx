@@ -2,6 +2,7 @@ import "./clickedMovieDetails.scss"
 import {Link} from "react-router-dom";
 import searchImage from '../../assets/SearchButton.png'
 import {useMovieDetailsPage} from "./MovieDetailsContext";
+import PropTypes from "prop-types";
 
 const ClickedMovieDetails = ({selectedMovie}) => {
     const detailsPage = useMovieDetailsPage();
@@ -35,6 +36,16 @@ const ClickedMovieDetails = ({selectedMovie}) => {
     );
 };
 
-ClickedMovieDetails.propTypes = {};
+ClickedMovieDetails.propTypes = {
+    selectedMovie: PropTypes.shape({
+        title: PropTypes.string,
+        date: PropTypes.number,
+        genres: PropTypes.arrayOf(PropTypes.string),
+        url: PropTypes.string,
+        rating: PropTypes.string,
+        runtime: PropTypes.string,
+        overview: PropTypes.string
+    })
+};
 
 export default ClickedMovieDetails;
