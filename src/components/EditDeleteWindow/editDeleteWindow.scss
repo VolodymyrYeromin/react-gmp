@@ -1,0 +1,35 @@
+.edit-delete-window {
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--body);
+  color: var(--white);
+  font-weight: 300;
+  font-size: 16px;
+  padding: 5px 0;
+  .window-header {
+    width: calc(100% - 10px) ;
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 5px 0;
+    button {
+      background-color: var(--body);
+      color: var(--white);
+      cursor: pointer;
+      border: none;
+    }
+  }
+  .window-options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      cursor: pointer;
+      padding: 5px 10px;
+      &:hover {
+        background-color: var(--red);
+      }
+    }
+  }
+}

@@ -5,15 +5,15 @@ import MoviesList from "./MoviesList/MoviesList";
 import ErrorBoundary from "./ErrorBoundary";
 import PropTypes from "prop-types";
 
-const Main = ({movies}) => {
+const Main = ({movies, setMoviesState}) => {
     return (
         <main>
             <div className="main-heading">
                 <MoviesFilterBar />
-                <MoviesSortBar />
+                <MoviesSortBar movies={movies} setMoviesState={setMoviesState} />
             </div>
             <ErrorBoundary>
-                <MoviesList movies={movies} />
+                <MoviesList movies={movies} setMoviesState={setMoviesState} />
             </ErrorBoundary>
         </main>
     )
@@ -21,11 +21,15 @@ const Main = ({movies}) => {
 
 Main.propTypes = {
     movies: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        year: PropTypes.number.isRequired,
-        genre: PropTypes.string.isRequired,
-        imageUrl: PropTypes.string.isRequired,
-    }))
+        title: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+        url: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        runtime: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired
+    })),
+    setMoviesState: PropTypes.func.isRequired
 };
 
 export default Main;
