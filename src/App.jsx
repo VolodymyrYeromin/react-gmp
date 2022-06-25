@@ -6,9 +6,11 @@ import PropTypes from "prop-types";
 import {useState} from "react";
 import ClickedMovieDetails from "./components/ClickedMovieDetails/ClickedMovieDetails";
 import {MovieDetailsProvider} from "./components/ClickedMovieDetails/MovieDetailsContext";
+import {useDispatch, useSelector} from "react-redux";
 
-const App = ({movies}) => {
-    const [moviesState, setMoviesState] = useState(movies);
+const App = () => {
+    const moviesFromAPI = useSelector((state) => state.movies.data);
+    const [moviesState, setMoviesState] = useState(moviesFromAPI);
     const [selectedMovie, setSelectedMovie] = useState({});
 
     return (
@@ -21,16 +23,16 @@ const App = ({movies}) => {
     );
 };
 
-App.propTypes = {
-    movies: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.number.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        url: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        runtime: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired
-    }))
-};
+// App.propTypes = {
+//     movies: PropTypes.arrayOf(PropTypes.shape({
+//         title: PropTypes.string.isRequired,
+//         date: PropTypes.number.isRequired,
+//         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+//         url: PropTypes.string.isRequired,
+//         rating: PropTypes.string.isRequired,
+//         runtime: PropTypes.string.isRequired,
+//         overview: PropTypes.string.isRequired
+//     }))
+// };
 
 export default App;

@@ -10,7 +10,7 @@ const MovieCard = ({movie, index, moviesState, setMoviesState, setSelectedMovie}
 
     return (
         <div className="movie-card">
-            <img className="movie-image" src={movie.url} alt={movie.title} onClick={() => {
+            <img className="movie-image" src={movie.poster_path} alt={movie.title} onClick={() => {
                 setSelectedMovie(movie);
                 showDetailsPage();
             }}/>
@@ -28,7 +28,7 @@ const MovieCard = ({movie, index, moviesState, setMoviesState, setSelectedMovie}
                     setSelectedMovie(movie);
                     showDetailsPage();
                 }}>{movie.title}</span>
-                <span className="movie-year">{movie.date}</span>
+                <span className="movie-year">{movie.release_date.substring(0,4)}</span>
             </div>
             <span className="movie-genres">{movie.genres.map((genre, index) => {
                 return index < movie.genres.length - 1 ? `${genre}, ` : genre
@@ -37,28 +37,28 @@ const MovieCard = ({movie, index, moviesState, setMoviesState, setSelectedMovie}
     )
 }
 
-MovieCard.propTypes = {
-    movie: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.number.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        url: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        runtime: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired
-    }),
-    index: PropTypes.number.isRequired,
-    moviesState: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.number.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        url: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        runtime: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired
-    })),
-    setMoviesState: PropTypes.func.isRequired,
-    setSelectedMovie: PropTypes.func.isRequired
-};
+// MovieCard.propTypes = {
+//     movie: PropTypes.shape({
+//         title: PropTypes.string.isRequired,
+//         date: PropTypes.number.isRequired,
+//         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+//         url: PropTypes.string.isRequired,
+//         rating: PropTypes.string.isRequired,
+//         runtime: PropTypes.string.isRequired,
+//         overview: PropTypes.string.isRequired
+//     }),
+//     index: PropTypes.number.isRequired,
+//     moviesState: PropTypes.arrayOf(PropTypes.shape({
+//         title: PropTypes.string.isRequired,
+//         date: PropTypes.number.isRequired,
+//         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+//         url: PropTypes.string.isRequired,
+//         rating: PropTypes.string.isRequired,
+//         runtime: PropTypes.string.isRequired,
+//         overview: PropTypes.string.isRequired
+//     })),
+//     setMoviesState: PropTypes.func.isRequired,
+//     setSelectedMovie: PropTypes.func.isRequired
+// };
 
 export default MovieCard;

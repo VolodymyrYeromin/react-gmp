@@ -17,6 +17,12 @@
 .movie-details-body {
   display: flex;
 }
+.movie-details-img {
+  min-width: 323px;
+  min-height: 455px;
+  height: 455px;
+  color: var(--white);
+}
 .movie-details-info {
   margin-left: 60px;
   .movie-heading {

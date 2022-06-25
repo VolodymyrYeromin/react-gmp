@@ -10,7 +10,7 @@ const Main = ({movies, setMoviesState, setSelectedMovie}) => {
         <main>
             <div className="main-heading">
                 <MoviesFilterBar />
-                <MoviesSortBar movies={movies} setMoviesState={setMoviesState} />
+                <MoviesSortBar />
             </div>
             <ErrorBoundary>
                 <MoviesList movies={movies} setMoviesState={setMoviesState} setSelectedMovie={setSelectedMovie}/>
@@ -19,18 +19,18 @@ const Main = ({movies, setMoviesState, setSelectedMovie}) => {
     )
 };
 
-Main.propTypes = {
-    movies: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.number.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        url: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        runtime: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired
-    })),
-    setMoviesState: PropTypes.func.isRequired,
-    setSelectedMovie: PropTypes.func.isRequired
-};
+// Main.propTypes = {
+//     movies: PropTypes.arrayOf(PropTypes.shape({
+//         title: PropTypes.string.isRequired,
+//         date: PropTypes.number.isRequired,
+//         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+//         url: PropTypes.string.isRequired,
+//         rating: PropTypes.string.isRequired,
+//         runtime: PropTypes.string.isRequired,
+//         overview: PropTypes.string.isRequired
+//     })),
+//     setMoviesState: PropTypes.func.isRequired,
+//     setSelectedMovie: PropTypes.func.isRequired
+// };
 
 export default Main;

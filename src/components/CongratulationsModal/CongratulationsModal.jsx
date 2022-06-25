@@ -24,9 +24,9 @@ const CongratulationsModal = ({onClose, showCongratulationsModal}) => {
     );
 };
 
-CongratulationsModal.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    showCongratulationsModal: PropTypes.bool.isRequired
-}
+// CongratulationsModal.propTypes = {
+//     onClose: PropTypes.func.isRequired,
+//     showCongratulationsModal: PropTypes.bool.isRequired
+// }
 
 export default CongratulationsModal;

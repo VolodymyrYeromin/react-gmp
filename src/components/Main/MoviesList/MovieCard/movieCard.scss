@@ -37,7 +37,8 @@
 }
 .movie-image {
   cursor: pointer;
-  width: 323px;
+  min-width: 323px;
+  min-height: 455px;
   height: 455px;
 }
 .movie-image:hover + .movie-options {

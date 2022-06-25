@@ -5,6 +5,8 @@ import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import {createTheme} from '@mui/material/styles';
 import {useState} from "react";
 import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
+import {closeModal} from "../../redux/features/modal/modalSlice";
 
 const theme = createTheme({
     palette: {
@@ -14,10 +16,8 @@ const theme = createTheme({
     },
 });
 
-const AddMovieModal = ({showModal, onClose, moviesState, setMoviesState, onSuccess}) => {
-    if (!showModal) {
-        return null;
-    }
+const AddMovieModal = ({moviesState, setMoviesState, onSuccess}) => {
+    const dispatch = useDispatch();
     const [form, setForm] = useState({
         title: '',
         date: null,
@@ -32,14 +32,14 @@ const AddMovieModal = ({showModal, onClose, moviesState, setMoviesState, onSucce
         e.preventDefault();
         const formattedForm = {...form, date: form.date.getFullYear()}
         setMoviesState(() => [...moviesState, formattedForm]);
-        onClose();
+        dispatch(closeModal());
         onSuccess();
     }
     return (
         <div className="overlay">
             <div className="modal-window">
                 <div className="modal-top">
-                    <button onClick={onClose} className="close-button">&#10005;</button>
+                    <button onClick={() => dispatch(closeModal())} className="close-button">&#10005;</button>
                 </div>
                 <h2>Add movie</h2>
                 <ThemeProvider theme={theme}>
@@ -62,7 +62,7 @@ const AddMovieModal = ({showModal, onClose, moviesState, setMoviesState, onSucce
                                    placeholder="Movie description" InputLabelProps={{shrink: true}} value={form.overview}
                                    onChange={e => setForm(prevState => ({...prevState, overview: e.target.value}))}/>
                         <div className="modal-buttons">
-                            <button onClick={onClose}>Reset</button>
+                            <button onClick={() => dispatch(closeModal())}>Reset</button>
                             <input type="submit" value="Submit"/>
                         </div>
                     </form>
@@ -72,20 +72,20 @@ const AddMovieModal = ({showModal, onClose, moviesState, setMoviesState, onSucce
     );
 };
 
-AddMovieModal.propTypes = {
-    moviesState: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.number.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        url: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        runtime: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired
-    })),
-    setMoviesState: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired,
-    showModal: PropTypes.bool.isRequired,
-    onSuccess: PropTypes.func.isRequired,
-};
+// AddMovieModal.propTypes = {
+//     moviesState: PropTypes.arrayOf(PropTypes.shape({
+//         title: PropTypes.string.isRequired,
+//         date: PropTypes.number.isRequired,
+//         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
+//         url: PropTypes.string.isRequired,
+//         rating: PropTypes.string.isRequired,
+//         runtime: PropTypes.string.isRequired,
+//         overview: PropTypes.string.isRequired
+//     })),
+//     setMoviesState: PropTypes.func.isRequired,
+//     onClose: PropTypes.func.isRequired,
+//     showModal: PropTypes.bool.isRequired,
+//     onSuccess: PropTypes.func.isRequired,
+// };
 
 export default AddMovieModal;
