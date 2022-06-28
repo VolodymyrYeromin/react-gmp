@@ -4,7 +4,9 @@ import {TextField, ThemeProvider} from "@mui/material";
 import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import {createTheme} from '@mui/material/styles';
 import {useState} from "react";
-import PropTypes from "prop-types";
+import {toggleEditModal, toggleModal} from "../../redux/features/modal/modalSlice";
+import {useDispatch} from "react-redux";
+import img1 from "../../assets/pulpfiction.png"
 
 const theme = createTheme({
     palette: {
@@ -14,29 +16,28 @@ const theme = createTheme({
     },
 });
 
-const EditMovieModal = ({movie, showEditModal, onClose, index, moviesState, setMoviesState, closeEditWindow}) => {
-    if (!showEditModal) {
-        return null;
-    }
-    const [form, setForm] = useState(movie)
+const EditMovieModal = () => {
+    const movie = {
+        title: 'Pulp Fiction',
+        release_date: '2018-02-07',
+        poster_path: img1,
+        vote_average: '1',
+        genres: ['Action & Adventure'],
+        runtime: '1h 23min',
+        overview: 'Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.—Soumitra'
+    };
+    const dispatch = useDispatch();
+    const [form, setForm] = useState(movie);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const transformedDate = typeof form.date === "number" ? form.date : form.date.getFullYear();
-        const formattedForm = {...form, date: transformedDate};
-        const newState = [...moviesState];
-        newState[index] = formattedForm;
-        setMoviesState(newState);
-        onClose();
-        closeEditWindow();
+        const transformedDate = typeof form.release_date === "number" ? form.release_date : form.release_date.getFullYear();
+        const formattedForm = {...form, release_date: transformedDate};
+
     }
 
     return (
-        <div className="overlay">
-            <div className="modal-window">
-                <div className="modal-top">
-                    <button onClick={onClose} className="close-button">&#10005;</button>
-                </div>
+        <div className="edit-movie-content">
                 <h2>Edit movie</h2>
                 <ThemeProvider theme={theme}>
                     <form onSubmit={handleSubmit}>
@@ -45,11 +46,11 @@ const EditMovieModal = ({movie, showEditModal, onClose, index, moviesState, setM
                                    onChange={e => setForm(prevState => ({...prevState, title: e.target.value}))}/>
                         <BasicDatePicker id="date" name="date" form={form} callback={setForm}/>
                         <TextField id="url" name="url" label="Movie URL" required variant="filled"
-                                   placeholder="https://" InputLabelProps={{shrink: true}} value={form.url}
-                                   onChange={e => setForm(prevState => ({...prevState, url: e.target.value}))}/>
+                                   placeholder="https://" InputLabelProps={{shrink: true}} value={form.poster_path}
+                                   onChange={e => setForm(prevState => ({...prevState, poster_path: e.target.value}))}/>
                         <TextField name="rating" id="rating" label="Rating" required variant="filled" type="number"
-                                   placeholder="7.8" InputLabelProps={{shrink: true}} value={form.rating}
-                                   onChange={e => setForm(prevState => ({...prevState, rating: e.target.value}))}/>
+                                   placeholder="7.8" InputLabelProps={{shrink: true}} value={form.vote_average}
+                                   onChange={e => setForm(prevState => ({...prevState, vote_average: e.target.value}))}/>
                         <MultipleSelectCheckmarks name="genres" id="genres" form={form} callback={setForm}/>
                         <TextField id="runtime" name="runtime" required label="Runtime" variant="filled"
                                    placeholder="minutes" InputLabelProps={{shrink: true}} value={form.runtime}
@@ -58,40 +59,16 @@ const EditMovieModal = ({movie, showEditModal, onClose, index, moviesState, setM
                                    placeholder="Movie description" InputLabelProps={{shrink: true}} value={form.overview}
                                    onChange={e => setForm(prevState => ({...prevState, overview: e.target.value}))}/>
                         <div className="modal-buttons">
-                            <button onClick={onClose}>Reset</button>
+                            <button onClick={() => {
+                                dispatch(toggleEditModal());
+                                dispatch(toggleModal());
+                            }}>Reset</button>
                             <input type="submit" value="Submit"/>
                         </div>
                     </form>
                 </ThemeProvider>
-            </div>
         </div>
     );
-};
-
-EditMovieModal.propTypes = {
-    movie: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.number.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        url: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        runtime: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired
-    }),
-    index: PropTypes.number.isRequired,
-    moviesState: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.number.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        url: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        runtime: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired
-    })),
-    setMoviesState: PropTypes.func.isRequired,
-    closeEditWindow: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired,
-    showEditModal: PropTypes.bool.isRequired,
 };
 
 export default EditMovieModal;

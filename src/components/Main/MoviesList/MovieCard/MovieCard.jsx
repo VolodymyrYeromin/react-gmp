@@ -4,9 +4,9 @@ import {useState} from "react";
 import EditDeleteWindow from "../../../EditDeleteWindow/EditDeleteWindow";
 import {useMovieDetailsPage} from "../../../ClickedMovieDetails/MovieDetailsContext";
 
-const MovieCard = ({movie, index, moviesState, setMoviesState, setSelectedMovie}) => {
-    const [showWindow, setShowWindow] = useState(false)
-    const {showDetailsPage} = useMovieDetailsPage()
+const MovieCard = ({movie, setSelectedMovie}) => {
+    const [showWindow, setShowWindow] = useState(false);
+    const {showDetailsPage} = useMovieDetailsPage();
 
     return (
         <div className="movie-card">
@@ -21,14 +21,13 @@ const MovieCard = ({movie, index, moviesState, setMoviesState, setSelectedMovie}
                 <div className="options-dot"></div>
                 <div className="options-dot"></div>
             </div>
-            <EditDeleteWindow showWindow={showWindow} onClose={() => setShowWindow(false)} movie={movie}
-                              moviesState={moviesState} setMoviesState={setMoviesState} index={index}/>
+            <EditDeleteWindow showWindow={showWindow} onClose={() => setShowWindow(false)} movie={movie}/>
             <div className="movie-heading">
                 <span className="movie-name" onClick={() => {
                     setSelectedMovie(movie);
                     showDetailsPage();
                 }}>{movie.title}</span>
-                <span className="movie-year">{movie.release_date.substring(0,4)}</span>
+                <span className="movie-year">{movie.release_date.substring(0, 4)}</span>
             </div>
             <span className="movie-genres">{movie.genres.map((genre, index) => {
                 return index < movie.genres.length - 1 ? `${genre}, ` : genre
@@ -37,28 +36,22 @@ const MovieCard = ({movie, index, moviesState, setMoviesState, setSelectedMovie}
     )
 }
 
-// MovieCard.propTypes = {
-//     movie: PropTypes.shape({
-//         title: PropTypes.string.isRequired,
-//         date: PropTypes.number.isRequired,
-//         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-//         url: PropTypes.string.isRequired,
-//         rating: PropTypes.string.isRequired,
-//         runtime: PropTypes.string.isRequired,
-//         overview: PropTypes.string.isRequired
-//     }),
-//     index: PropTypes.number.isRequired,
-//     moviesState: PropTypes.arrayOf(PropTypes.shape({
-//         title: PropTypes.string.isRequired,
-//         date: PropTypes.number.isRequired,
-//         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-//         url: PropTypes.string.isRequired,
-//         rating: PropTypes.string.isRequired,
-//         runtime: PropTypes.string.isRequired,
-//         overview: PropTypes.string.isRequired
-//     })),
-//     setMoviesState: PropTypes.func.isRequired,
-//     setSelectedMovie: PropTypes.func.isRequired
-// };
+MovieCard.propTypes = {
+    movie: PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            tagline: PropTypes.string,
+            vote_average: PropTypes.number.isRequired,
+            vote_count: PropTypes.number,
+            release_date: PropTypes.string.isRequired,
+            poster_path: PropTypes.string.isRequired,
+            overview: PropTypes.string.isRequired,
+            budget: PropTypes.number,
+            revenue: PropTypes.number,
+            runtime: PropTypes.number,
+            genres: PropTypes.arrayOf(PropTypes.string).isRequired
+        }
+    ),
+    setSelectedMovie: PropTypes.func.isRequired
+};
 
 export default MovieCard;

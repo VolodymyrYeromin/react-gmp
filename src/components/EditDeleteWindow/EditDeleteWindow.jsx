@@ -1,16 +1,13 @@
 import './editDeleteWindow.scss'
-import {useState} from "react";
-import EditMovieModal from "../EditMovieModal/EditMovieModal";
-import DeleteMovieModal from "../DeleteMovieModal/DeleteMovieModal";
+import {useDispatch} from "react-redux";
+import {toggleDeleteModal, toggleEditModal, toggleModal} from "../../redux/features/modal/modalSlice";
 import PropTypes from "prop-types";
 
-const EditDeleteWindow = ({showWindow, onClose, movie, index, moviesState, setMoviesState}) => {
+const EditDeleteWindow = ({showWindow, onClose, movie}) => {
     if (!showWindow) {
         return null;
     }
-
-    const [showEditModal, setShowEditModal] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const dispatch = useDispatch();
 
     return (
         <div className="edit-delete-window">
@@ -19,46 +16,38 @@ const EditDeleteWindow = ({showWindow, onClose, movie, index, moviesState, setMo
             </div>
             <ul className="window-options">
                 <li onClick={() => {
-                    setShowEditModal(true);
+                    dispatch(toggleModal());
+                    dispatch(toggleEditModal());
+                    onClose();
                 }}>Edit
                 </li>
                 <li onClick={() => {
-                    setShowDeleteModal(true);
+                    dispatch(toggleModal());
+                    dispatch(toggleDeleteModal());
+                    onClose();
                 }}>Delete
                 </li>
             </ul>
-            <EditMovieModal index={index} movie={movie} moviesState={moviesState} setMoviesState={setMoviesState}
-                            showEditModal={showEditModal} closeEditWindow={onClose}
-                            onClose={() => setShowEditModal(false)}/>
-            <DeleteMovieModal index={index} moviesState={moviesState} setMoviesState={setMoviesState}
-                              showDeleteModal={showDeleteModal} closeDeleteWindow={onClose} onClose={() => setShowDeleteModal(false)}/>
         </div>
     );
 };
 
-// EditDeleteWindow.propTypes = {
-//     movie: PropTypes.shape({
-//         title: PropTypes.string.isRequired,
-//         date: PropTypes.number.isRequired,
-//         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-//         url: PropTypes.string.isRequired,
-//         rating: PropTypes.string.isRequired,
-//         runtime: PropTypes.string.isRequired,
-//         overview: PropTypes.string.isRequired
-//     }),
-//     index: PropTypes.number.isRequired,
-//     moviesState: PropTypes.arrayOf(PropTypes.shape({
-//         title: PropTypes.string.isRequired,
-//         date: PropTypes.number.isRequired,
-//         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-//         url: PropTypes.string.isRequired,
-//         rating: PropTypes.string.isRequired,
-//         runtime: PropTypes.string.isRequired,
-//         overview: PropTypes.string.isRequired
-//     })),
-//     setMoviesState: PropTypes.func.isRequired,
-//     showWindow: PropTypes.bool.isRequired,
-//     onClose: PropTypes.func.isRequired,
-// };
+EditDeleteWindow.propTypes = {
+    movie: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        tagline: PropTypes.string,
+        vote_average: PropTypes.number.isRequired,
+        vote_count: PropTypes.number,
+        release_date: PropTypes.string.isRequired,
+        poster_path: PropTypes.string.isRequired,
+        overview: PropTypes.string.isRequired,
+        budget: PropTypes.number,
+        revenue: PropTypes.number,
+        runtime: PropTypes.number,
+        genres: PropTypes.arrayOf(PropTypes.string).isRequired
+    }),
+    showWindow: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+};
 
 export default EditDeleteWindow;

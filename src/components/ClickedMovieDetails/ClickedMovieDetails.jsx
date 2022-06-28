@@ -25,7 +25,8 @@ const ClickedMovieDetails = ({selectedMovie}) => {
         <div className="clicked-movie-details">
             <div className="movie-details-header">
                 <Link to="/" className="logo">netflixroulette</Link>
-                <button className="search-movie-btn" onClick={detailsPage.hideDetailsPage}><img src={searchImage} alt="search"/></button>
+                <button className="search-movie-btn" onClick={detailsPage.hideDetailsPage}><img src={searchImage}
+                                                                                                alt="search"/></button>
             </div>
             <div className="movie-details-body">
                 <img className="movie-details-img" src={selectedMovie.poster_path} alt={selectedMovie.title}/>
@@ -46,16 +47,16 @@ const ClickedMovieDetails = ({selectedMovie}) => {
     );
 };
 
-// ClickedMovieDetails.propTypes = {
-//     selectedMovie: PropTypes.shape({
-//         title: PropTypes.string,
-//         date: PropTypes.number,
-//         genres: PropTypes.arrayOf(PropTypes.string),
-//         url: PropTypes.string,
-//         rating: PropTypes.string,
-//         runtime: PropTypes.string,
-//         overview: PropTypes.string
-//     })
-// };
+ClickedMovieDetails.propTypes = {
+    selectedMovie: PropTypes.oneOfType([PropTypes.shape({
+        title: PropTypes.string,
+        date: PropTypes.number,
+        genres: PropTypes.arrayOf(PropTypes.string),
+        url: PropTypes.string,
+        rating: PropTypes.string,
+        runtime: PropTypes.string,
+        overview: PropTypes.string
+    }), PropTypes.shape({})])
+};
 
 export default ClickedMovieDetails;
