@@ -12,8 +12,8 @@ const mockMovies = [
         url: img1,
         rating: '1',
         genres: ['Action & Adventure'],
-        runtime: '7',
-        overview: 'Yo'
+        runtime: '1h 23min',
+        overview: 'Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.—Soumitra'
     },
     {
         title: 'Bohemian Rhapsody',
@@ -21,8 +21,8 @@ const mockMovies = [
         url: img2,
         rating: '2',
         genres: ['Drama', 'Biography', 'Music'],
-        runtime: '7',
-        overview: 'Yo'
+        runtime: '1h 33min',
+        overview: 'Bohemian Rhapsody overview'
     },
     {
         title: 'Kill Bill: Vol 2',
@@ -30,8 +30,8 @@ const mockMovies = [
         url: img3,
         rating: '3',
         genres: ['Oscar winning Movie'],
-        runtime: '7',
-        overview: 'Yo'
+        runtime: '1h 33min',
+        overview: 'Kill Bill: Vol 2 overview'
     },
     {
         title: 'Avengers: War of Infinity',
@@ -39,8 +39,8 @@ const mockMovies = [
         url: img4,
         rating: '4',
         genres: ['Action & Adventure'],
-        runtime: '7',
-        overview: 'Yo'
+        runtime: '1h 33min',
+        overview: 'Avengers: War of Infinity overview'
     },
     {
         title: 'Inception',
@@ -48,8 +48,8 @@ const mockMovies = [
         url: img5,
         rating: '5',
         genres: ['Action & Adventure'],
-        runtime: '7',
-        overview: 'Yo'
+        runtime: '1h 33min',
+        overview: 'Inception overview'
     },
     {
         title: 'Reservoir dogs',
@@ -57,8 +57,8 @@ const mockMovies = [
         url: img6,
         rating: '6',
         genres: ['Oscar winning Movie'],
-        runtime: '7',
-        overview: 'Yo'
+        runtime: '1h 33min',
+        overview: 'Reservoir dogs overview'
     },
 ]
 

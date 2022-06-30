@@ -5,10 +5,16 @@ import AddMovieModal from "../AddMovieModal/AddMovieModal";
 import {useState} from "react";
 import CongratulationsModal from "../CongratulationsModal/CongratulationsModal";
 import PropTypes from "prop-types";
+import {useMovieDetailsPage} from "../ClickedMovieDetails/MovieDetailsContext";
 
 const Header = ({moviesState, setMoviesState}) => {
     const [showModal, setShowModal] = useState(false);
     const [showCongratulationsModal, setShowCongratulationsModal] = useState(false);
+    const detailsPage = useMovieDetailsPage();
+
+    if (detailsPage.visible) {
+        return null;
+    }
 
     return (
         <header>

@@ -5,7 +5,7 @@ import MoviesList from "./MoviesList/MoviesList";
 import ErrorBoundary from "./ErrorBoundary";
 import PropTypes from "prop-types";
 
-const Main = ({movies, setMoviesState}) => {
+const Main = ({movies, setMoviesState, setSelectedMovie}) => {
     return (
         <main>
             <div className="main-heading">
@@ -13,7 +13,7 @@ const Main = ({movies, setMoviesState}) => {
                 <MoviesSortBar movies={movies} setMoviesState={setMoviesState} />
             </div>
             <ErrorBoundary>
-                <MoviesList movies={movies} setMoviesState={setMoviesState} />
+                <MoviesList movies={movies} setMoviesState={setMoviesState} setSelectedMovie={setSelectedMovie}/>
             </ErrorBoundary>
         </main>
     )
@@ -29,7 +29,8 @@ Main.propTypes = {
         runtime: PropTypes.string.isRequired,
         overview: PropTypes.string.isRequired
     })),
-    setMoviesState: PropTypes.func.isRequired
+    setMoviesState: PropTypes.func.isRequired,
+    setSelectedMovie: PropTypes.func.isRequired
 };
 
 export default Main;
