@@ -1,8 +1,8 @@
 import "./clickedMovieDetails.scss"
 import {Link} from "react-router-dom";
 import searchImage from '../../assets/SearchButton.png'
-import {useMovieDetailsPage} from "./MovieDetailsContext";
-import PropTypes from "prop-types";
+import {useDispatch, useSelector} from "react-redux";
+import {removeSelectedMovie} from "../../redux/features/selectedMovie/selectedMovieSlice";
 
 const transformDuration = (numberOfMinutes) => {
     let string = `${Math.floor(numberOfMinutes / 60)}h `;
@@ -14,19 +14,18 @@ const transformDuration = (numberOfMinutes) => {
     return string;
 };
 
-const ClickedMovieDetails = ({selectedMovie}) => {
-    const detailsPage = useMovieDetailsPage();
-
-    if (!detailsPage.visible) {
-        return null;
+const ClickedMovieDetails = () => {
+    const selectedMovie = useSelector(state => state.selectedMovie.movie);
+    const dispatch = useDispatch();
+    const hideSelectedMovie = () => {
+        dispatch(removeSelectedMovie());
     }
 
     return (
         <div className="clicked-movie-details">
             <div className="movie-details-header">
                 <Link to="/" className="logo">netflixroulette</Link>
-                <button className="search-movie-btn" onClick={detailsPage.hideDetailsPage}><img src={searchImage}
-                                                                                                alt="search"/></button>
+                <button className="search-movie-btn" onClick={hideSelectedMovie}><img src={searchImage} alt="search"/></button>
             </div>
             <div className="movie-details-body">
                 <img className="movie-details-img" src={selectedMovie.poster_path} alt={selectedMovie.title}/>
@@ -45,18 +44,6 @@ const ClickedMovieDetails = ({selectedMovie}) => {
             </div>
         </div>
     );
-};
-
-ClickedMovieDetails.propTypes = {
-    selectedMovie: PropTypes.oneOfType([PropTypes.shape({
-        title: PropTypes.string,
-        date: PropTypes.number,
-        genres: PropTypes.arrayOf(PropTypes.string),
-        url: PropTypes.string,
-        rating: PropTypes.string,
-        runtime: PropTypes.string,
-        overview: PropTypes.string
-    }), PropTypes.shape({})])
 };
 
 export default ClickedMovieDetails;

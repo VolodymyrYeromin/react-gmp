@@ -3,9 +3,8 @@ import MoviesFilterBar from "./MoviesFilterBar/MoviesFilterBar";
 import MoviesSortBar from "./MoviesSortBar/MoviesSortBar";
 import MoviesList from "./MoviesList/MoviesList";
 import ErrorBoundary from "./ErrorBoundary";
-import PropTypes from "prop-types";
 
-const Main = ({setSelectedMovie}) => {
+const Main = () => {
 
     return (
         <main>
@@ -14,14 +13,10 @@ const Main = ({setSelectedMovie}) => {
                 <MoviesSortBar />
             </div>
             <ErrorBoundary>
-                <MoviesList setSelectedMovie={setSelectedMovie}/>
+                <MoviesList />
             </ErrorBoundary>
         </main>
     )
-};
-
-Main.propTypes = {
-    setSelectedMovie: PropTypes.func.isRequired
 };
 
 export default Main;

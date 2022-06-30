@@ -1,11 +1,10 @@
 import './moviesList.scss';
 import MovieCard from "./MovieCard/MovieCard";
-import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {getMovies} from "../../../redux/features/movies/moviesSlice";
 import {useEffect} from "react";
 
-const MoviesList = ({setSelectedMovie}) => {
+const MoviesList = () => {
     const moviesFromAPI = useSelector(state => state.movies.data);
     const amountOfMovies = useSelector(state => state.movies.totalAmount)
     const dispatch = useDispatch();
@@ -20,16 +19,12 @@ const MoviesList = ({setSelectedMovie}) => {
             <div className="movies-list">
                 {moviesFromAPI.map(movie => {
                     return (
-                        <MovieCard key={movie.id} movie={movie} setSelectedMovie={setSelectedMovie} />
+                        <MovieCard key={movie.id} movie={movie} />
                     )
                 })}
             </div>
         </>
     )
 }
-
-MoviesList.propTypes = {
-    setSelectedMovie: PropTypes.func.isRequired
-};
 
 export default MoviesList;
