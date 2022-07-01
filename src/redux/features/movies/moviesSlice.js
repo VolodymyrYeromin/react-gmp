@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
+import constants from "../../../constants";
 
 
 const initialState = {
@@ -12,10 +13,10 @@ const initialState = {
 export const getMovies = createAsyncThunk('movies/getMovies', async (_, thunkAPI) => {
     const sortFilterValues = thunkAPI.getState().sortFilterBar;
     let url;
-    if (sortFilterValues.filtering.toLowerCase() === 'all') {
-        url = `http://localhost:4000/movies?sortBy=${sortFilterValues.sorting}&sortOrder=desc`;
+    if (sortFilterValues.filtering.toLowerCase() === constants.genres.ALL) {
+        url = `${constants.BASE_URL}?sortBy=${sortFilterValues.sorting}&sortOrder=desc`;
     } else {
-        url = `http://localhost:4000/movies?sortBy=${sortFilterValues.sorting}&sortOrder=desc&filter=${sortFilterValues.filtering}`;
+        url = `${constants.BASE_URL}?sortBy=${sortFilterValues.sorting}&sortOrder=desc&filter=${sortFilterValues.filtering}`;
     }
     try {
         const response = await axios(url);

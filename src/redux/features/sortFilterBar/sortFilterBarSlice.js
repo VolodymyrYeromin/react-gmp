@@ -1,9 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
+import constants from "../../../constants";
 
 
 const initialState = {
-    filtering: 'all',
-    sorting: 'release_date'
+    filtering: constants.genres.ALL,
+    sorting: constants.sorting.RELEASE_DATE
 }
 
 const sortFilterBarSlice = createSlice({
