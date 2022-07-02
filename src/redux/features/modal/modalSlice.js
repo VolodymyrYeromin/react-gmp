@@ -1,35 +1,32 @@
 import {createSlice} from "@reduxjs/toolkit";
+import constants from "../../../constants";
 
 const initialState = {
     isOpen: false,
-    isAddModalShown: false,
-    isEditModalShown: false,
-    isCongratulationsModalShown: false,
-    isDeleteModalShown: false
+    openedModal: '',
+    chosenMovie: {},
 }
 
 const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
-        toggleModal: (state) => {
-            state.isOpen = !state.isOpen;
+        setModal: (state, action) => {
+            if (action.payload === constants.modals.CLOSE) {
+                state.isOpen = false;
+                state.openedModal = '';
+                state.chosenMovie = {}
+            } else {
+                state.isOpen = true;
+                state.openedModal = action.payload;
+            }
         },
-        toggleAddModal: (state) => {
-            state.isAddModalShown = !state.isAddModalShown;
-        },
-        toggleEditModal: (state) => {
-            state.isEditModalShown = !state.isEditModalShown;
-        },
-        toggleCongratulationsModal: (state) => {
-            state.isCongratulationsModalShown = !state.isCongratulationsModalShown;
-        },
-        toggleDeleteModal: (state) => {
-            state.isDeleteModalShown = !state.isDeleteModalShown;
+        setChosenMovie: (state, action) => {
+            state.chosenMovie = action.payload
         },
     }
 })
 
-export const {toggleModal, toggleAddModal, toggleEditModal, toggleCongratulationsModal, toggleDeleteModal} = modalSlice.actions;
+export const {setModal, setChosenMovie} = modalSlice.actions;
 
 export default modalSlice.reducer;

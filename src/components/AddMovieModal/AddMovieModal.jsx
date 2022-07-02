@@ -5,7 +5,8 @@ import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import {createTheme} from '@mui/material/styles';
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {toggleAddModal, toggleCongratulationsModal, toggleModal} from "../../redux/features/modal/modalSlice";
+import {setModal} from "../../redux/features/modal/modalSlice";
+import constants from "../../constants";
 
 const theme = createTheme({
     palette: {
@@ -25,14 +26,17 @@ const AddMovieModal = () => {
         genres: [],
         runtime: '',
         overview: ''
-    })
+    });
+
+    const closeModal = () => {
+        dispatch(setModal(constants.modals.CLOSE));
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formattedForm = {...form, release_date: form.release_date.getFullYear()};
 
-        dispatch(toggleAddModal());
-        dispatch(toggleCongratulationsModal());
+        dispatch(setModal(constants.modals.CONGRATULATIONS));
     }
     return (
         <div className="add-movie-content">
@@ -57,10 +61,7 @@ const AddMovieModal = () => {
                                placeholder="Movie description" InputLabelProps={{shrink: true}} value={form.overview}
                                onChange={e => setForm(prevState => ({...prevState, overview: e.target.value}))}/>
                     <div className="modal-buttons">
-                        <button onClick={() => {
-                            dispatch(toggleAddModal());
-                            dispatch(toggleModal());
-                        }}>Reset</button>
+                        <button onClick={closeModal}>Reset</button>
                         <input type="submit" value="Submit"/>
                     </div>
                 </form>

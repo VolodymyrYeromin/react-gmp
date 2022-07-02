@@ -1,7 +1,8 @@
 import './editDeleteWindow.scss'
 import {useDispatch} from "react-redux";
-import {toggleDeleteModal, toggleEditModal, toggleModal} from "../../redux/features/modal/modalSlice";
+import {setChosenMovie, setModal} from "../../redux/features/modal/modalSlice";
 import PropTypes from "prop-types";
+import constants from "../../constants";
 
 const EditDeleteWindow = ({showWindow, onClose, movie}) => {
     if (!showWindow) {
@@ -9,23 +10,22 @@ const EditDeleteWindow = ({showWindow, onClose, movie}) => {
     }
     const dispatch = useDispatch();
 
+    const openModal = (e, modalName) => {
+        e.stopPropagation();
+        dispatch(setChosenMovie(movie));
+        dispatch(setModal(modalName));
+        onClose();
+    }
+
     return (
         <div className="edit-delete-window">
             <div className="window-header">
                 <button onClick={onClose} className="close-button">&#10005;</button>
             </div>
             <ul className="window-options">
-                <li onClick={() => {
-                    dispatch(toggleModal());
-                    dispatch(toggleEditModal());
-                    onClose();
-                }}>Edit
+                <li onClick={(e) => openModal(e, constants.modals.EDIT)}>Edit
                 </li>
-                <li onClick={() => {
-                    dispatch(toggleModal());
-                    dispatch(toggleDeleteModal());
-                    onClose();
-                }}>Delete
+                <li onClick={(e) => openModal(e, constants.modals.DELETE)}>Delete
                 </li>
             </ul>
         </div>

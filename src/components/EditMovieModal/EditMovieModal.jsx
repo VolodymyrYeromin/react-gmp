@@ -4,9 +4,9 @@ import {TextField, ThemeProvider} from "@mui/material";
 import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import {createTheme} from '@mui/material/styles';
 import {useState} from "react";
-import {toggleEditModal, toggleModal} from "../../redux/features/modal/modalSlice";
-import {useDispatch} from "react-redux";
-import img1 from "../../assets/pulpfiction.png"
+import {setModal} from "../../redux/features/modal/modalSlice";
+import {useDispatch, useSelector} from "react-redux";
+import constants from "../../constants";
 
 const theme = createTheme({
     palette: {
@@ -17,23 +17,19 @@ const theme = createTheme({
 });
 
 const EditMovieModal = () => {
-    const movie = {
-        title: 'Pulp Fiction',
-        release_date: '2018-02-07',
-        poster_path: img1,
-        vote_average: '1',
-        genres: ['Action & Adventure'],
-        runtime: '1h 23min',
-        overview: 'Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.—Soumitra'
-    };
+    const movie = useSelector(state => state.modal.chosenMovie)
     const dispatch = useDispatch();
     const [form, setForm] = useState(movie);
+    const closeModal = () => {
+        dispatch(setModal(constants.modals.CLOSE));
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const transformedDate = typeof form.release_date === "number" ? form.release_date : form.release_date.getFullYear();
         const formattedForm = {...form, release_date: transformedDate};
 
+        closeModal();
     }
 
     return (
@@ -59,10 +55,7 @@ const EditMovieModal = () => {
                                    placeholder="Movie description" InputLabelProps={{shrink: true}} value={form.overview}
                                    onChange={e => setForm(prevState => ({...prevState, overview: e.target.value}))}/>
                         <div className="modal-buttons">
-                            <button onClick={() => {
-                                dispatch(toggleEditModal());
-                                dispatch(toggleModal());
-                            }}>Reset</button>
+                            <button onClick={closeModal}>Reset</button>
                             <input type="submit" value="Submit"/>
                         </div>
                     </form>

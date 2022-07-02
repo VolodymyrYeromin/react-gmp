@@ -15,7 +15,8 @@ const MovieCard = ({movie}) => {
     return (
         <div className="movie-card" onClick={showSelectedMovie}>
             <img className="movie-image" src={movie.poster_path} alt={movie.title} />
-            <div className="movie-options" onClick={() => {
+            <div className="movie-options" onClick={(e) => {
+                e.stopPropagation();
                 setShowWindow(true)
             }}>
                 <div className="options-dot"></div>
