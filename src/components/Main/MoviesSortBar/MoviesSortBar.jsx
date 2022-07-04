@@ -1,16 +1,13 @@
 import './moviesSortBar.scss';
-import {useEffect, useRef, useState} from "react";
-import PropTypes from "prop-types";
+import {useRef} from "react";
+import {useDispatch} from "react-redux";
+import {setSortingValue} from "../../../redux/features/sortFilterBar/sortFilterBarSlice";
+import {getMovies} from "../../../redux/features/movies/moviesSlice";
+import constants from "../../../constants";
 
-const MoviesSortBar = ({movies, setMoviesState}) => {
+const MoviesSortBar = () => {
+    const dispatch = useDispatch();
     const selectRef = useRef(null);
-    const [selectValue, setSelectValue] = useState('date');
-
-    useEffect(() => {
-        setMoviesState([...movies].sort((a,b) => {
-            return b[selectValue] - a[selectValue]
-        }))
-    }, [selectValue])
 
     return (
         <div className="movies-sort-bar">
@@ -18,26 +15,16 @@ const MoviesSortBar = ({movies, setMoviesState}) => {
                 Sort by
             </span>
             <div className="select_box">
-                <select ref={selectRef} onChange={() => setSelectValue(selectRef.current.value)}>
-                    <option value="date">Release date</option>
-                    <option value="rating">Rating</option>
+                <select ref={selectRef} onChange={() => {
+                    dispatch(setSortingValue(selectRef.current.value));
+                    dispatch(getMovies());
+                }}>
+                    <option value={constants.sorting.RELEASE_DATE}>Release date</option>
+                    <option value={constants.sorting.VOTE_AVERAGE}>Rating</option>
                 </select>
             </div>
         </div>
     )
-};
-
-MoviesSortBar.propTypes = {
-    movies: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.number.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        url: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        runtime: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired
-    })),
-    setMoviesState: PropTypes.func.isRequired
 };
 
 export default MoviesSortBar;

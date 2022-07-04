@@ -2,35 +2,22 @@ import "./styles/index.scss";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
-import PropTypes from "prop-types";
-import {useState} from "react";
 import ClickedMovieDetails from "./components/ClickedMovieDetails/ClickedMovieDetails";
-import {MovieDetailsProvider} from "./components/ClickedMovieDetails/MovieDetailsContext";
+import Modal from "./components/Modal/Modal";
+import {useSelector} from "react-redux";
 
-const App = ({movies}) => {
-    const [moviesState, setMoviesState] = useState(movies);
-    const [selectedMovie, setSelectedMovie] = useState({});
+const App = () => {
+    const isModalOpen = useSelector(state => state.modal.isOpen);
+    const {isSelectedMovieShown} = useSelector(state => state.selectedMovie)
 
     return (
-        <MovieDetailsProvider>
-            <Header moviesState={moviesState} setMoviesState={setMoviesState}/>
-            <ClickedMovieDetails selectedMovie={selectedMovie} />
-            <Main movies={moviesState} setMoviesState={setMoviesState} setSelectedMovie={setSelectedMovie}/>
+        <>
+            {isSelectedMovieShown ? <ClickedMovieDetails /> : <Header />}
+            <Main />
+            {isModalOpen && <Modal />}
             <Footer />
-        </MovieDetailsProvider>
+        </>
     );
-};
-
-App.propTypes = {
-    movies: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.number.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        url: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        runtime: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired
-    }))
 };
 
 export default App;

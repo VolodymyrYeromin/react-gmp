@@ -9,9 +9,9 @@ export default function BasicDatePicker({form, callback}) {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
                 label="Release date"
-                value={typeof form.date === "number" ? new Date(form.date, 0) : form.date}
+                value={typeof form.release_date === "number" ? new Date(form.release_date, 0) : form.release_date}
                 onChange={(newValue) => {
-                    callback({...form, date:newValue});
+                    callback({...form, release_date:newValue});
                 }}
                 renderInput={(params) => <TextField {...params} required variant="filled" inputProps={{
                     ...params.inputProps, placeholder: "Select Date"

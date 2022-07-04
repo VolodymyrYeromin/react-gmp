@@ -1,22 +1,27 @@
 import './moviesFilterBar.scss';
+import {useDispatch} from "react-redux";
+import {setFilterValue} from "../../../redux/features/sortFilterBar/sortFilterBarSlice";
+import {getMovies} from "../../../redux/features/movies/moviesSlice";
+import constants from "../../../constants";
+import {useState} from "react";
 
 const MoviesFilterBar = () => {
-    const categoriesArray = ["All", "Documentary", "Comedy", "Horror", "Crime"];
-    const makeElementActive = (e) => {
-        if(!e.target.classList.contains("filter-active")) {
-            document.querySelector(".filter-active").classList.remove("filter-active");
-            e.target.classList.add("filter-active");
-        }
+    const categoriesArray = [constants.genres.ALL, constants.genres.DOCUMENTARY, constants.genres.COMEDY, constants.genres.HORROR, constants.genres.CRIME];
+    const [activeElement, setActiveElement] = useState(0);
+    const dispatch = useDispatch();
+    const makeElementActive = (index) => {
+        setActiveElement(index);
     }
 
     return (
         <ul className="movies-filter-bar">
             {categoriesArray.map((element, index) => {
-                if(index === 0) {
-                    return <li key={index} className="filter-active" onClick={(e) => makeElementActive(e)}>{element}</li>
-                } else {
-                    return <li key={index} onClick={(e) => makeElementActive(e)}>{element}</li>
-                }
+                const className = activeElement === index ? "filter-active" : null;
+                return <li key={index} className={className} onClick={() => {
+                    makeElementActive(index);
+                    dispatch(setFilterValue(element));
+                    dispatch(getMovies());
+                }}>{element}</li>
             })}
         </ul>
     )
