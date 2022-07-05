@@ -1,12 +1,10 @@
 import "./movieCard.scss";
 import PropTypes from "prop-types";
-import {useState} from "react";
 import EditDeleteWindow from "../../../EditDeleteWindow/EditDeleteWindow";
 import {useDispatch} from "react-redux";
 import {setSelectedMovie} from "../../../../redux/features/selectedMovie/selectedMovieSlice";
 
 const MovieCard = ({movie}) => {
-    const [showWindow, setShowWindow] = useState(false);
     const dispatch = useDispatch();
     const showSelectedMovie = () => {
         dispatch(setSelectedMovie(movie));
@@ -15,15 +13,7 @@ const MovieCard = ({movie}) => {
     return (
         <div className="movie-card" onClick={showSelectedMovie}>
             <img className="movie-image" src={movie.poster_path} alt={movie.title} />
-            <div className="movie-options" onClick={(e) => {
-                e.stopPropagation();
-                setShowWindow(true)
-            }}>
-                <div className="options-dot"></div>
-                <div className="options-dot"></div>
-                <div className="options-dot"></div>
-            </div>
-            <EditDeleteWindow showWindow={showWindow} onClose={() => setShowWindow(false)} movie={movie}/>
+            <EditDeleteWindow movie={movie}/>
             <div className="movie-heading">
                 <span className="movie-name">{movie.title}</span>
                 <span className="movie-year">{movie.release_date.substring(0, 4)}</span>

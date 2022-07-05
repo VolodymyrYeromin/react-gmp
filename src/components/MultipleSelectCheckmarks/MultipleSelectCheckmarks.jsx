@@ -24,30 +24,30 @@ const mockGenres = [
   "Comedy"
 ];
 
-export default function MultipleSelectCheckmarks({form, callback}) {
+export default function MultipleSelectCheckmarks({form, callback, name, onBlur}) {
 
   const transformString = (event) => {
-    callback({...form, genres: typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value});
+    callback(name, typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value);
   };
 
   return (
-      <FormControl required variant="filled" sx={{ m: 1, width: 300, color:"white" }}>
+      <FormControl variant="filled" sx={{ m: 1, width: 300, color:"white" }}>
         <InputLabel id="genre-id-label">Genre</InputLabel>
-        <Select
+        <Select onClose={onBlur}
           labelId="genre-id-label"
           id="genre-id"
           multiple
-          value={form.genres}
+          value={form.values.genres}
           onChange={(e) => {
               transformString(e);
           }}
-          input={<FilledInput label="Genre" />}
+          input={<FilledInput name={name} label="Genre" onBlur={onBlur} />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
           {mockGenres.map((genre) => (
             <MenuItem key={genre} value={genre}>
-              <Checkbox checked={form.genres.indexOf(genre) > -1} />
+              <Checkbox checked={form.values.genres.indexOf(genre) > -1} />
               <ListItemText primary={genre} />
             </MenuItem>
           ))}

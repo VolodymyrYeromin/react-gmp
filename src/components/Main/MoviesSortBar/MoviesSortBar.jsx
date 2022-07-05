@@ -3,7 +3,7 @@ import {useRef} from "react";
 import {useDispatch} from "react-redux";
 import {setSortingValue} from "../../../redux/features/sortFilterBar/sortFilterBarSlice";
 import {getMovies} from "../../../redux/features/movies/moviesSlice";
-import constants from "../../../constants";
+import {sortings} from "../../../constants";
 
 const MoviesSortBar = () => {
     const dispatch = useDispatch();
@@ -19,8 +19,9 @@ const MoviesSortBar = () => {
                     dispatch(setSortingValue(selectRef.current.value));
                     dispatch(getMovies());
                 }}>
-                    <option value={constants.sorting.RELEASE_DATE}>Release date</option>
-                    <option value={constants.sorting.VOTE_AVERAGE}>Rating</option>
+                    {sortings.map(sorting => {
+                        return <option key={sorting.value} value={sorting.value}>{sorting.title}</option>
+                    })}
                 </select>
             </div>
         </div>

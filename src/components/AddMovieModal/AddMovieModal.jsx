@@ -1,71 +1,47 @@
 import "./addMovieModal.scss";
-import MultipleSelectCheckmarks from "../MultipleSelectCheckmarks/MultipleSelectCheckmarks";
-import {TextField, ThemeProvider} from "@mui/material";
-import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
-import {createTheme} from '@mui/material/styles';
-import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {setModal} from "../../redux/features/modal/modalSlice";
-import constants from "../../constants";
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#F65261FF',
-        },
-    },
-});
+import {useFormik} from "formik";
+import * as Yup from "yup";
+import {createMovie} from "../../redux/features/movies/moviesSlice";
+import MovieForm from "../MovieForm/MovieForm";
 
 const AddMovieModal = () => {
     const dispatch = useDispatch();
-    const [form, setForm] = useState({
-        title: '',
-        release_date: '',
-        poster_path: '',
-        vote_average: '',
-        genres: [],
-        runtime: '',
-        overview: ''
-    });
 
-    const closeModal = () => {
-        dispatch(setModal(constants.modals.CLOSE));
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formattedForm = {...form, release_date: form.release_date.getFullYear()};
-
-        dispatch(setModal(constants.modals.CONGRATULATIONS));
-    }
+    const formik = useFormik({
+        initialValues: {
+            title: '',
+            release_date: null,
+            poster_path: '',
+            vote_average: '',
+            genres: [],
+            runtime: '',
+            overview: ''
+        },
+        validationSchema: Yup.object({
+            title: Yup.string().required("Required"),
+            release_date: Yup.date().nullable(),
+            poster_path: Yup.string().url("Provide URL").required("Required"),
+            vote_average: Yup.number().max(100, "Rating must be <= 100"),
+            genres: Yup.array().min(1, "Required").required("Required"),
+            runtime: Yup.number().min(0, "Enter correct runtime").integer("Enter integer").required("Required"),
+            overview: Yup.string().required("Required")
+        }),
+        onSubmit: (values) => {
+            const formattedForm = values;
+            if (values.release_date) {
+                formattedForm.release_date = values.release_date.toISOString().split('T')[0];
+            }
+            if (!values.vote_average) {
+                formattedForm.vote_average = 0;
+            }
+            dispatch(createMovie(formattedForm));
+        }
+    })
     return (
         <div className="add-movie-content">
             <h2>Add movie</h2>
-            <ThemeProvider theme={theme}>
-                <form onSubmit={handleSubmit}>
-                    <TextField id="title" color="primary" required name="title" variant="filled" label="Title"
-                               placeholder="Title" InputLabelProps={{shrink: true}} value={form.title}
-                               onChange={e => setForm(prevState => ({...prevState, title: e.target.value}))}/>
-                    <BasicDatePicker id="date" name="date" form={form} callback={setForm}/>
-                    <TextField id="url" name="url" label="Movie URL" required variant="filled"
-                               placeholder="https://" InputLabelProps={{shrink: true}} value={form.poster_path}
-                               onChange={e => setForm(prevState => ({...prevState, poster_path: e.target.value}))}/>
-                    <TextField name="rating" id="rating" label="Rating" required variant="filled" type="number"
-                               placeholder="7.8" InputLabelProps={{shrink: true}} value={form.vote_average}
-                               onChange={e => setForm(prevState => ({...prevState, vote_average: e.target.value}))}/>
-                    <MultipleSelectCheckmarks name="genres" id="genres" form={form} callback={setForm}/>
-                    <TextField id="runtime" name="runtime" required label="Runtime" variant="filled"
-                               placeholder="minutes" InputLabelProps={{shrink: true}} value={form.runtime}
-                               onChange={e => setForm(prevState => ({...prevState, runtime: e.target.value}))}/>
-                    <TextField id="overview" name="overview" variant="filled" required label="Overview" multiline maxRows={4}
-                               placeholder="Movie description" InputLabelProps={{shrink: true}} value={form.overview}
-                               onChange={e => setForm(prevState => ({...prevState, overview: e.target.value}))}/>
-                    <div className="modal-buttons">
-                        <button onClick={closeModal}>Reset</button>
-                        <input type="submit" value="Submit"/>
-                    </div>
-                </form>
-            </ThemeProvider>
+            <MovieForm formik={formik} />
         </div>
     );
 };

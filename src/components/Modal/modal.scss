@@ -20,6 +20,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    align-items: flex-start;
   }
   .MuiInputBase-root {
     height: 100%;
@@ -27,17 +28,20 @@
   .MuiInputBase-multiline {
     min-height: 80px;
   }
-  .MuiFormControl-root:first-of-type,
-  .MuiFormControl-root:nth-of-type(3),
-  .MuiFormControl-root:nth-of-type(5) {
+  .MuiFormControl-root {
+    width: 100%;
+  }
+  .validated:first-of-type,
+  .validated:nth-of-type(3),
+  .validated:nth-of-type(5) {
     width: 350px;
   }
-  .MuiFormControl-root:nth-of-type(2),
-  .MuiFormControl-root:nth-of-type(4),
-  .MuiFormControl-root:nth-of-type(6) {
+  .validated:nth-of-type(2),
+  .validated:nth-of-type(4),
+  .validated:nth-of-type(6) {
     width: 180px;
   }
-  .MuiFormControl-root:nth-of-type(7) {
+  .validated:nth-of-type(7) {
     width: 100%;
   }
   .MuiTextField-root, .MuiInputLabel, .MuiOutlinedInput-root {
