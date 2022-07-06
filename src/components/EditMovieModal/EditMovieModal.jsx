@@ -22,7 +22,7 @@ const EditMovieModal = () => {
         },
         validationSchema: Yup.object({
             title: Yup.string().required("Required"),
-            release_date: Yup.date().nullable(),
+            release_date: Yup.date().nullable().required("Required"),
             poster_path: Yup.string().url("Provide URL").required("Required"),
             vote_average: Yup.number().max(100, "Rating must be <= 100"),
             genres: Yup.array().min(1, "Required").required("Required"),
