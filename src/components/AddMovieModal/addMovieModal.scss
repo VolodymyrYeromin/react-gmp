@@ -1,0 +1,9 @@
+.validated {
+  display: flex;
+  flex-direction: column;
+  .validation {
+    color: var(--red);
+    font-size: 14px;
+    margin-left: 10px;
+  }
+}

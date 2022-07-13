@@ -20,4 +20,16 @@ const constants = {
     BASE_URL: 'http://localhost:4000/movies'
 }
 
+export const genres = ['all', 'Documentary', 'Comedy', 'Horror', 'Crime'];
+export const sortings = [
+    {
+        title: 'Release date',
+        value: 'release_date'
+    },
+    {
+        title: 'Rating',
+        value: 'vote_average'
+    },
+]
+
 export default constants;
