@@ -1,10 +1,10 @@
 const constants = {
     genres: {
         ALL: 'all',
-        DOCUMENTARY: 'Documentary',
-        COMEDY: 'Comedy',
-        HORROR: 'Horror',
-        CRIME: 'Crime',
+        DOCUMENTARY: 'documentary',
+        COMEDY: 'comedy',
+        HORROR: 'horror',
+        CRIME: 'crime',
     },
     sorting: {
         RELEASE_DATE: 'release_date',
@@ -17,10 +17,10 @@ const constants = {
         CONGRATULATIONS: 'congratulations',
         CLOSE: 'close'
     },
-    BASE_URL: 'http://localhost:4000/movies'
+    BASE_URL: 'http://localhost:4000/movies',
 }
 
-export const genres = ['all', 'Documentary', 'Comedy', 'Horror', 'Crime'];
+export const genres = ['all', 'documentary', 'comedy', 'horror', 'crime'];
 export const sortings = [
     {
         title: 'Release date',

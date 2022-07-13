@@ -1,17 +1,26 @@
 import "./movieCard.scss";
 import PropTypes from "prop-types";
 import EditDeleteWindow from "../../../EditDeleteWindow/EditDeleteWindow";
-import {useDispatch} from "react-redux";
-import {setSelectedMovie} from "../../../../redux/features/selectedMovie/selectedMovieSlice";
+import {useNavigate, useParams} from "react-router-dom";
+import useQuery from "../../../../hooks/hooks";
 
 const MovieCard = ({movie}) => {
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const query = useQuery();
+    const sortBy = query.get("sortBy");
+    const genre = query.get("genre");
+    const {searchQuery} = useParams();
+
     const showSelectedMovie = () => {
-        dispatch(setSelectedMovie(movie));
+        if (genre) {
+            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}?genre=${genre}${sortBy ? `&sortBy=${sortBy}` : ''}&movie=${movie.id}`);
+        } else {
+            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}${sortBy ? `?sortBy=${sortBy}` : ''}&movie=${movie.id}`);
+        }
     }
 
     return (
-        <div className="movie-card" onClick={showSelectedMovie}>
+        <div className="movie-card" id={`id${movie.id}`} onClick={showSelectedMovie}>
             <img className="movie-image" src={movie.poster_path} alt={movie.title} />
             <EditDeleteWindow movie={movie}/>
             <div className="movie-heading">

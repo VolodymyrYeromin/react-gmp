@@ -1,28 +1,48 @@
 import './moviesFilterBar.scss';
 import {useDispatch} from "react-redux";
-import {setFilterValue} from "../../../redux/features/sortFilterBar/sortFilterBarSlice";
 import {getMovies} from "../../../redux/features/movies/moviesSlice";
 import {genres} from "../../../constants";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import useQuery from "../../../hooks/hooks";
+import {useNavigate, useParams} from "react-router-dom";
 
 const MoviesFilterBar = () => {
     const categoriesArray = genres;
-    const [activeElement, setActiveElement] = useState(0);
+    const [activeElement, setActiveElement] = useState( 0);
+
+    const navigate = useNavigate();
+    const {searchQuery} = useParams();
+    const query = useQuery();
+    const genre = query.get("genre");
+    const sortBy = query.get("sortBy");
+
+    useEffect(() => {
+        getFilteredMovies(categoriesArray.indexOf(genre), genre, searchQuery)
+    }, [genre])
+
     const dispatch = useDispatch();
+
     const makeElementActive = (index) => {
         setActiveElement(index);
     }
-    const getFilteredMovies = (index, element) => {
-        makeElementActive(index);
-        dispatch(setFilterValue(element));
-        dispatch(getMovies());
+    const getFilteredMovies = (index, element, searchQuery) => {
+        makeElementActive(index === -1 ? 0 : index);
+        dispatch(getMovies({searchQuery, filtering: element === 'all' ? '' : element, sorting: sortBy}));
+    }
+
+    const navigateGenre = (element) => {
+        if (element !== 'all') {
+            navigate(`${searchQuery ? `/search/${searchQuery}` : '/search'}?genre=${element}${sortBy ? `&sortBy=${sortBy}` : ''}`)
+        } else {
+            navigate(`${searchQuery ? `/search/${searchQuery}` : '/search'}${sortBy ? `?sortBy=${sortBy}` : ''}`)
+        }
     }
 
     return (
         <ul className="movies-filter-bar">
             {categoriesArray.map((element, index) => {
                 const className = activeElement === index ? "filter-active" : null;
-                return <li key={index} className={className} onClick={() => getFilteredMovies(index, element)}>{element}</li>
+                return <li key={index} className={className} onClick={() => navigateGenre(element)}>{element}</li>
             })}
         </ul>
     )

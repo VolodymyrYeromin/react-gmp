@@ -1,8 +1,8 @@
 import "./clickedMovieDetails.scss"
-import {Link} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import searchImage from '../../assets/SearchButton.png'
-import {useDispatch, useSelector} from "react-redux";
-import {removeSelectedMovie} from "../../redux/features/selectedMovie/selectedMovieSlice";
+import {useSelector} from "react-redux";
+import useQuery from "../../hooks/hooks";
 
 const transformDuration = (numberOfMinutes) => {
     let string = `${Math.floor(numberOfMinutes / 60)}h `;
@@ -16,9 +16,18 @@ const transformDuration = (numberOfMinutes) => {
 
 const ClickedMovieDetails = () => {
     const selectedMovie = useSelector(state => state.selectedMovie.movie);
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const query = useQuery();
+    const sortBy = query.get("sortBy");
+    const genre = query.get("genre");
+    const {searchQuery} = useParams();
+
     const hideSelectedMovie = () => {
-        dispatch(removeSelectedMovie());
+        if (genre) {
+            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}?genre=${genre}${sortBy ? `&sortBy=${sortBy}` : ''}`);
+        } else {
+            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}${sortBy ? `?sortBy=${sortBy}` : ''}`);
+        }
     }
 
     return (
@@ -34,10 +43,10 @@ const ClickedMovieDetails = () => {
                         <h2>{selectedMovie.title}</h2>
                         <div className="rating">{selectedMovie.vote_average}</div>
                     </div>
-                    <p className="genres">{selectedMovie.genres.map((genre, index) => {
+                    <p className="genres">{selectedMovie.genres ? selectedMovie.genres.map((genre, index) => {
                         return index < selectedMovie.genres.length - 1 ? `${genre}, ` : genre
-                    })}</p>
-                    <span className="year">{selectedMovie.release_date.substring(0, 4)}</span>
+                    }) : null}</p>
+                    <span className="year">{selectedMovie.release_date ? selectedMovie.release_date.substring(0, 4) : null}</span>
                     <span className="length">{transformDuration(selectedMovie.runtime)}</span>
                     <div className="description">{selectedMovie.overview}</div>
                 </div>
