@@ -14,8 +14,10 @@ const MovieCard = ({movie}) => {
     const showSelectedMovie = () => {
         if (genre) {
             navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}?genre=${genre}${sortBy ? `&sortBy=${sortBy}` : ''}&movie=${movie.id}`);
+        } else if (sortBy) {
+            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}?sortBy=${sortBy}&movie=${movie.id}`);
         } else {
-            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}${sortBy ? `?sortBy=${sortBy}` : ''}&movie=${movie.id}`);
+            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}?movie=${movie.id}`);
         }
     }
 
