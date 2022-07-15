@@ -13,6 +13,7 @@ module.exports = {
     output: {
         assetModuleFilename: "assets/[hash][ext][query]",
         path: path.resolve(__dirname, 'dist'),
+        publicPath: "/"
     },
     devtool: "source-map",
     target: "web",
@@ -23,7 +24,8 @@ module.exports = {
         static: {
             directory: "./dist",
         },
-        port: 3000
+        port: 3000,
+        historyApiFallback: true,
     },
     module: {
         rules: [

@@ -2,23 +2,19 @@ import "./movieCard.scss";
 import PropTypes from "prop-types";
 import EditDeleteWindow from "../../../EditDeleteWindow/EditDeleteWindow";
 import {useNavigate, useParams} from "react-router-dom";
-import useQuery from "../../../../hooks/hooks";
+import useQuery from "../../../../hooks/useQuery";
+import constants from "../../../../constants";
+import useCustomNavigation from "../../../../hooks/useCustomNavigation";
 
 const MovieCard = ({movie}) => {
     const navigate = useNavigate();
     const query = useQuery();
-    const sortBy = query.get("sortBy");
-    const genre = query.get("genre");
+    const sortBy = query.get(constants.queryParams.SORT_BY);
+    const genre = query.get(constants.queryParams.GENRE);
     const {searchQuery} = useParams();
 
     const showSelectedMovie = () => {
-        if (genre) {
-            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}?genre=${genre}${sortBy ? `&sortBy=${sortBy}` : ''}&movie=${movie.id}`);
-        } else if (sortBy) {
-            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}?sortBy=${sortBy}&movie=${movie.id}`);
-        } else {
-            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}?movie=${movie.id}`);
-        }
+        useCustomNavigation({navigate, searchQuery, genre, sortBy, movie: movie.id});
     }
 
     return (

@@ -1,10 +1,12 @@
 import './moviesSortBar.scss';
-import {useRef, useEffect} from "react";
+import {useRef} from "react";
 import {useDispatch} from "react-redux";
 import {getMovies} from "../../../redux/features/movies/moviesSlice";
-import {sortings} from "../../../constants";
-import useQuery from "../../../hooks/hooks";
+import constants from "../../../constants";
+import useQuery from "../../../hooks/useQuery";
 import {useNavigate, useParams} from "react-router-dom";
+import useDidMountEffect from "../../../hooks/useDidMountEffect";
+import useCustomNavigation from "../../../hooks/useCustomNavigation";
 
 const MoviesSortBar = () => {
     const dispatch = useDispatch();
@@ -13,12 +15,19 @@ const MoviesSortBar = () => {
     const navigate = useNavigate();
     const {searchQuery} = useParams();
     const query = useQuery();
-    const sortBy = query.get("sortBy");
-    const genre = query.get("genre")
+    const sortBy = query.get(constants.queryParams.SORT_BY);
+    const genre = query.get(constants.queryParams.GENRE);
+    const movie = query.get(constants.queryParams.MOVIE);
 
-    useEffect(() => {
-        dispatch(getMovies({searchQuery, sorting: sortBy, filtering: genre}));
+    useDidMountEffect(() => {
+        if (sortBy) {
+            dispatch(getMovies({searchQuery, sorting: sortBy, filtering: genre}));
+        }
     }, [sortBy])
+
+    const sortMovies = () => {
+        useCustomNavigation({navigate, searchQuery, genre, sortBy: selectRef.current.value, movie});
+    }
 
     return (
         <div className="movies-sort-bar">
@@ -26,10 +35,8 @@ const MoviesSortBar = () => {
                 Sort by
             </span>
             <div className="select_box">
-                <select ref={selectRef} onChange={() => {
-                    navigate(`${searchQuery ? `/search/${searchQuery}` : '/search'}?${genre ? `genre=${genre}&` : ''}sortBy=${selectRef.current.value}`);
-                }}>
-                    {sortings.map(sorting => {
+                <select ref={selectRef} onChange={sortMovies}>
+                    {constants.sorting.map(sorting => {
                         if (sortBy === sorting.value) {
                             return <option key={sorting.value} value={sorting.value} selected>{sorting.title}</option>
                         } else {

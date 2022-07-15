@@ -6,15 +6,16 @@ import ClickedMovieDetails from "./components/ClickedMovieDetails/ClickedMovieDe
 import Modal from "./components/Modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {Routes, Route, Navigate} from "react-router-dom";
-import {Fragment, useEffect} from "react";
-import useQuery from "./hooks/hooks";
+import {useEffect} from "react";
+import useQuery from "./hooks/useQuery";
 import {getSelectedMovie} from "./redux/features/selectedMovie/selectedMovieSlice";
 import NotFound from "./components/NotFound/NotFound";
+import constants from "./constants";
 
 const App = () => {
     const isModalOpen = useSelector(state => state.modal.isOpen);
     const query = useQuery();
-    const selectedMovieParam = query.get("movie");
+    const selectedMovieParam = query.get(constants.queryParams.MOVIE);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -25,30 +26,29 @@ const App = () => {
 
     return (
         <>
-                {selectedMovieParam ? <ClickedMovieDetails /> : null}
-                <Routes>
-                    <Route path="/search" element={
-                        <Fragment>
-                            {selectedMovieParam ? null : <Header />}
-                            <Main />
-                            {isModalOpen && <Modal />}
-                            <Footer />
-                        </Fragment>
-                    }/>
-                    <Route path="/search/:searchQuery" element={
-                        <Fragment>
-                            {selectedMovieParam ? null : <Header />}
-                            <Main />
-                            {isModalOpen && <Modal />}
-                            <Footer />
-                        </Fragment>
-                    }/>
-                    <Route
-                        path="/"
-                        element={<Navigate to="/search" replace />}
-                    />
-                    <Route path="*" element={<NotFound />} />
-                </Routes>
+            <Routes>
+                <Route path="/search" element={
+                    <>
+                        {selectedMovieParam ? <ClickedMovieDetails /> : <Header />}
+                        <Main />
+                        {isModalOpen && <Modal />}
+                        <Footer />
+                    </>
+                }/>
+                <Route path="/search/:searchQuery" element={
+                    <>
+                        {selectedMovieParam ? <ClickedMovieDetails /> : <Header />}
+                        <Main />
+                        {isModalOpen && <Modal />}
+                        <Footer />
+                    </>
+                }/>
+                <Route
+                    path="/"
+                    element={<Navigate to="/search" replace />}
+                />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
         </>
     );
 };

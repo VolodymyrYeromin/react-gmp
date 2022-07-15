@@ -2,16 +2,18 @@ import "./searchBar.scss";
 import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
 import {getMovies} from "../../../redux/features/movies/moviesSlice";
-import {useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import useQuery from "../../../hooks/hooks";
+import useQuery from "../../../hooks/useQuery";
+import constants from "../../../constants";
+import useDidMountEffect from "../../../hooks/useDidMountEffect";
+import useCustomNavigation from "../../../hooks/useCustomNavigation";
 
 const SearchBar = () => {
     const {searchQuery} = useParams();
     const navigate = useNavigate();
     const query = useQuery();
-    const genre = query.get("genre");
-    const sortBy = query.get("sortBy");
+    const sortBy = query.get(constants.queryParams.SORT_BY);
+    const genre = query.get(constants.queryParams.GENRE);
 
     const dispatch = useDispatch();
     const formik = useFormik({
@@ -19,14 +21,10 @@ const SearchBar = () => {
             search_query: ''
         },
         onSubmit: (values) => {
-            if (genre) {
-                navigate(`${values.search_query ? `/search/${values.search_query}` : '/search'}?genre=${genre}${sortBy ? `&sortBy=${sortBy}` : ''}`);
-            } else {
-                navigate(`${values.search_query ? `/search/${values.search_query}` : '/search'}${sortBy ? `?sortBy=${sortBy}` : ''}`);
-            }
+            useCustomNavigation({navigate, searchQuery: values.search_query, genre, sortBy});
         }
     })
-    useEffect(() => {
+    useDidMountEffect(() => {
         formik.setFieldValue('search_query', searchQuery ? searchQuery : '', false);
         dispatch(getMovies({searchQuery, sorting: sortBy, filtering: genre}));
     }, [searchQuery])

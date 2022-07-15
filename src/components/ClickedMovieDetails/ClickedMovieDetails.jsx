@@ -2,7 +2,9 @@ import "./clickedMovieDetails.scss"
 import {Link, useNavigate, useParams} from "react-router-dom";
 import searchImage from '../../assets/SearchButton.png'
 import {useSelector} from "react-redux";
-import useQuery from "../../hooks/hooks";
+import useQuery from "../../hooks/useQuery";
+import constants from "../../constants";
+import useCustomNavigation from "../../hooks/useCustomNavigation";
 
 const transformDuration = (numberOfMinutes) => {
     let string = `${Math.floor(numberOfMinutes / 60)}h `;
@@ -18,16 +20,12 @@ const ClickedMovieDetails = () => {
     const selectedMovie = useSelector(state => state.selectedMovie.movie);
     const navigate = useNavigate();
     const query = useQuery();
-    const sortBy = query.get("sortBy");
-    const genre = query.get("genre");
+    const sortBy = query.get(constants.queryParams.SORT_BY);
+    const genre = query.get(constants.queryParams.GENRE);
     const {searchQuery} = useParams();
 
     const hideSelectedMovie = () => {
-        if (genre) {
-            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}?genre=${genre}${sortBy ? `&sortBy=${sortBy}` : ''}`);
-        } else {
-            navigate(`${searchQuery ? `/search/${values.search_query}` : '/search'}${sortBy ? `?sortBy=${sortBy}` : ''}`);
-        }
+        useCustomNavigation({navigate, searchQuery, genre, sortBy})
     }
 
     return (
