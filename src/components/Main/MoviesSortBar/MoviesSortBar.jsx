@@ -20,6 +20,7 @@ const MoviesSortBar = () => {
     const movie = query.get(constants.queryParams.MOVIE);
 
     useDidMountEffect(() => {
+        console.log(searchQuery)
         if (sortBy) {
             dispatch(getMovies({searchQuery, sorting: sortBy, filtering: genre}));
         }

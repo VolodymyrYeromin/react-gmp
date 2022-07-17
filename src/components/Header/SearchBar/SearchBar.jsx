@@ -7,6 +7,7 @@ import useQuery from "../../../hooks/useQuery";
 import constants from "../../../constants";
 import useDidMountEffect from "../../../hooks/useDidMountEffect";
 import useCustomNavigation from "../../../hooks/useCustomNavigation";
+import {useEffect} from "react";
 
 const SearchBar = () => {
     const {searchQuery} = useParams();
@@ -25,9 +26,12 @@ const SearchBar = () => {
         }
     })
     useDidMountEffect(() => {
-        formik.setFieldValue('search_query', searchQuery ? searchQuery : '', false);
         dispatch(getMovies({searchQuery, sorting: sortBy, filtering: genre}));
-    }, [searchQuery])
+    }, [searchQuery]);
+
+    useEffect(() => {
+        formik.setFieldValue('search_query', searchQuery ? searchQuery : '', false);
+    }, []);
 
     return (
         <div className="search-block">

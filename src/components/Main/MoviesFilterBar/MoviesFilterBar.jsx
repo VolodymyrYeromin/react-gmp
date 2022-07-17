@@ -30,7 +30,7 @@ const MoviesFilterBar = () => {
     }
     const getFilteredMovies = (index, element, searchQuery) => {
         makeElementActive(index === -1 ? 0 : index);
-        dispatch(getMovies({searchQuery, filtering: element === 'all' ? '' : element, sorting: sortBy}));
+        dispatch(getMovies({searchQuery, filtering: element === constants.genres[0] ? '' : element, sorting: sortBy}));
     }
 
     const navigateGenre = (element) => {
