@@ -18,7 +18,6 @@ const MoviesList = () => {
     const movie = query.get(constants.queryParams.MOVIE);
 
     useEffect(()=> {
-        console.log(searchQuery)
         dispatch(getMovies({searchQuery: searchQuery.searchQuery ? searchQuery.searchQuery : '', sorting: sortBy, filtering: genre, movie}));
     }, [])
 
