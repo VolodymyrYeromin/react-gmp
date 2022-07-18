@@ -1,5 +1,3 @@
-import React from 'react';
-
 const useCustomNavigation = ({navigate, searchQuery, genre, sortBy, movie}) => {
     if (genre) {
         navigate(`${searchQuery ? `/search/${searchQuery}` : '/search'}?genre=${genre}${sortBy ? `&sortBy=${sortBy}` : ''}${movie ? `&movie=${movie}` : ''}`);
