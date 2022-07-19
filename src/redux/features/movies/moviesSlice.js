@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import constants from "../../../constants";
 import {setModal} from "../modal/modalSlice";
-
+import {sortings} from "../../../helpers";
 
 const initialState = {
     totalAmount: 0,
@@ -11,14 +11,9 @@ const initialState = {
     limit: 10,
 }
 
-export const getMovies = createAsyncThunk('movies/getMovies', async (_, thunkAPI) => {
-    const sortFilterValues = thunkAPI.getState().sortFilterBar;
-    let url;
-    if (sortFilterValues.filtering.toLowerCase() === constants.genres.ALL) {
-        url = `${constants.BASE_URL}?sortBy=${sortFilterValues.sorting}&sortOrder=desc`;
-    } else {
-        url = `${constants.BASE_URL}?sortBy=${sortFilterValues.sorting}&sortOrder=desc&filter=${sortFilterValues.filtering}`;
-    }
+export const getMovies = createAsyncThunk('movies/getMovies', async (data = {}) => {
+    let url = `${constants.BASE_URL}?sortBy=${data.sorting ? data.sorting : sortings.RELEASE_DATE}&sortOrder=desc&search=${data.searchQuery ? data.searchQuery : ''}&searchBy=title&filter=${data.filtering ? data.filtering : ''}`;
+
     try {
         const response = await axios(url);
         return response.data;

@@ -17,7 +17,7 @@ const Header = () => {
                 <Link to="/" className="logo"><span className="bold">netflix</span>roulette</Link>
                 <button className="add-movie-btn" onClick={openAddModal}>+ Add movie</button>
             </div>
-            <SearchBar/>
+            <SearchBar />
         </header>
     )
 };

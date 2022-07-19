@@ -1,25 +1,33 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import constants from "../../../constants";
+import axios from "axios";
 
 const initialState = {
     movie: {},
     isSelectedMovieShown: false
 };
 
-const selectedMovieSlice = createSlice({
-    name: 'selectedMovie',
-    initialState,
-    reducers: {
-        setSelectedMovie: (state, action) => {
-            state.movie = action.payload;
-            state.isSelectedMovieShown = true;
-        },
-        removeSelectedMovie: (state) => {
-            state.movie = {};
-            state.isSelectedMovieShown = false;
-        }
+export const getSelectedMovie = createAsyncThunk('selectedMovie/getSelectedMovie', async (id) => {
+    let url = `${constants.BASE_URL}/${id}`;
+
+    try {
+        const response = await axios(url);
+        return response.data;
+    } catch (error) {
+        console.log(error);
     }
 })
 
-export const {setSelectedMovie, removeSelectedMovie} = selectedMovieSlice.actions;
+const selectedMovieSlice = createSlice({
+    name: 'selectedMovie',
+    initialState,
+    reducers: {},
+    extraReducers: {
+        [getSelectedMovie.fulfilled]:(state, action) => {
+            state.movie = action.payload;
+            state.isSelectedMovieShown = true;
+        },
+    }
+})
 
 export default selectedMovieSlice.reducer;
