@@ -12,7 +12,7 @@ const initialState = {
 }
 
 export const getMovies = createAsyncThunk('movies/getMovies', async (data = {}) => {
-    let url = `${constants.BASE_URL}?sortBy=${data.sorting ? data.sorting : sortings.RELEASE_DATE}&sortOrder=desc&search=${data.searchQuery ? data.searchQuery : ''}&searchBy=title&filter=${data.filtering ? data.filtering : ''}`;
+    let url = `${constants.BASE_URL}?sortBy=${data.sorting ? data.sorting : sortings().RELEASE_DATE}&sortOrder=desc&search=${data.searchQuery ? data.searchQuery : ''}&searchBy=title&filter=${data.filtering ? data.filtering : ''}`;
 
     try {
         const response = await axios(url);

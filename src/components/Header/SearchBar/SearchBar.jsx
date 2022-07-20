@@ -34,11 +34,11 @@ const SearchBar = () => {
     }, []);
 
     return (
-        <div className="search-block">
+        <div className="search-block" data-testid="search-block">
             <h1>Find your movie</h1>
             <form onSubmit={formik.handleSubmit} className="search-bar">
-                <input className="search-query" name="search_query" type="text" placeholder="What do you want to watch?" value={formik.values.search_query} onChange={formik.handleChange}/>
-                <input className="search-button" type="submit" value="Search"/>
+                <input className="search-query" name="search_query" type="text" placeholder="What do you want to watch?" value={formik.values.search_query} onChange={formik.handleChange} data-testid="search-input"/>
+                <input className="search-button" type="submit" value="Search" data-testid="search-button"/>
             </form>
         </div>
     );
