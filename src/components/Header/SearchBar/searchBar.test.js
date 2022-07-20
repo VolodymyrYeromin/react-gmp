@@ -37,7 +37,7 @@ describe("Test search bar", () => {
         await act(() => fireEvent.change(searchInput, {target: {value: 'avengers'}}));
         expect(searchInput.value).toBe('avengers');
 
-        userEvent.click(searchButton)
+        await userEvent.click(searchButton)
         await waitFor(() => {
             expect(mockedNavigate).toHaveBeenCalledTimes(1);
         });
