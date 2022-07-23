@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test search bar search bar matching screenshot 1`] = `
+<div
+  class="search-block"
+  data-testid="search-block"
+>
+  <h1>
+    Find your movie
+  </h1>
+  <form
+    class="search-bar"
+  >
+    <input
+      class="search-query"
+      data-testid="search-input"
+      name="search_query"
+      placeholder="What do you want to watch?"
+      type="text"
+      value=""
+    />
+    <input
+      class="search-button"
+      data-testid="search-button"
+      type="submit"
+      value="Search"
+    />
+  </form>
+</div>
+`;

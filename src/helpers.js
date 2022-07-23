@@ -1,7 +1,13 @@
 import constants from "./constants";
 
-export const sortings = {};
+export const sortings = () => {
+    const sortingsObject = {}
 
-for (const key of constants.sorting) {
-    sortings[key.value.toUpperCase()] = key.value;
-}
+    for (const key of constants.sorting) {
+        sortingsObject[key.value.toUpperCase()] = key.value;
+    }
+
+    return sortingsObject;
+};
+
+
