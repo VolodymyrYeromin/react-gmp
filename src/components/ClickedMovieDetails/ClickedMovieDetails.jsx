@@ -1,10 +1,8 @@
-import "./clickedMovieDetails.scss"
-import {Link, useNavigate, useParams} from "react-router-dom";
-import searchImage from '../../assets/SearchButton.png'
+import styles from "./clickedMovieDetails.module.scss"
+import searchImage from '../../../public/assets/SearchButton.png'
 import {useSelector} from "react-redux";
-import useQuery from "../../hooks/useQuery";
-import constants from "../../constants";
-import useCustomNavigation from "../../hooks/useCustomNavigation";
+import Link from "next/link";
+import Image from "next/image";
 
 const transformDuration = (numberOfMinutes) => {
     let string = `${Math.floor(numberOfMinutes / 60)}h `;
@@ -18,35 +16,26 @@ const transformDuration = (numberOfMinutes) => {
 
 const ClickedMovieDetails = () => {
     const selectedMovie = useSelector(state => state.selectedMovie.movie);
-    const navigate = useNavigate();
-    const query = useQuery();
-    const sortBy = query.get(constants.queryParams.SORT_BY);
-    const genre = query.get(constants.queryParams.GENRE);
-    const {searchQuery} = useParams();
-
-    const hideSelectedMovie = () => {
-        useCustomNavigation({navigate, searchQuery, genre, sortBy})
-    }
 
     return (
-        <div className="clicked-movie-details">
-            <div className="movie-details-header">
-                <Link to="/" className="logo">netflixroulette</Link>
-                <button className="search-movie-btn" onClick={hideSelectedMovie}><img src={searchImage} alt="search"/></button>
+        <div className={styles.clickedMovieDetails}>
+            <div className={styles.movieDetailsHeader}>
+                <Link href="/"><a className="logo">netflixroulette</a></Link>
+                <button className="search-movie-btn" onClick={()=>{}}><Image src={searchImage} height={30} width={30} alt="search"/></button>
             </div>
-            <div className="movie-details-body">
-                <img className="movie-details-img" src={selectedMovie.poster_path} alt={selectedMovie.title}/>
-                <div className="movie-details-info">
-                    <div className="movie-heading">
+            <div className={styles.movieDetailsBody}>
+                <img className={styles.movieDetailsImg} src={selectedMovie.poster_path} alt={selectedMovie.title}/>
+                <div className={styles.movieDetailsInfo}>
+                    <div className={styles.movieHeading}>
                         <h2>{selectedMovie.title}</h2>
-                        <div className="rating">{selectedMovie.vote_average}</div>
+                        <div className={styles.rating}>{selectedMovie.vote_average}</div>
                     </div>
-                    <p className="genres">{selectedMovie.genres ? selectedMovie.genres.map((genre, index) => {
+                    <p className={styles.genres}>{selectedMovie.genres ? selectedMovie.genres.map((genre, index) => {
                         return index < selectedMovie.genres.length - 1 ? `${genre}, ` : genre
                     }) : null}</p>
-                    <span className="year">{selectedMovie.release_date ? selectedMovie.release_date.substring(0, 4) : null}</span>
-                    <span className="length">{transformDuration(selectedMovie.runtime)}</span>
-                    <div className="description">{selectedMovie.overview}</div>
+                    <span className={styles.year}>{selectedMovie.release_date ? selectedMovie.release_date.substring(0, 4) : null}</span>
+                    <span className={styles.length}>{transformDuration(selectedMovie.runtime)}</span>
+                    <div className={styles.description}>{selectedMovie.overview}</div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import "./addMovieModal.scss";
+import "./addMovieModal.module.scss";
 import {useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import * as Yup from "yup";

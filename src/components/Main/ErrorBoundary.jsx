@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./errorBoundary.module.scss"
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class ErrorBoundary extends React.Component {
 
     render() {
         if (this.state.hasError) {
-            return <h2 className="error-message">Oops, something went wrong... We are doing our best to fix this issue</h2>;
+            return <h2 className={styles.errorMessage}>Oops, something went wrong... We are doing our best to fix this issue</h2>;
         }
 
         return this.props.children;

@@ -1,4 +1,4 @@
-import './editDeleteWindow.scss'
+import styles from './editDeleteWindow.module.scss'
 import {useDispatch} from "react-redux";
 import {setChosenMovie, setModal} from "../../redux/features/modal/modalSlice";
 import PropTypes from "prop-types";
@@ -26,11 +26,11 @@ const EditDeleteWindow = ({movie}) => {
                 <div className="options-dot"></div>
                 <div className="options-dot"></div>
             </div>
-            {showWindow && <div className="edit-delete-window">
-                <div className="window-header">
+            {showWindow && <div className={styles.editDeleteWindow}>
+                <div className={styles.windowHeader}>
                     <button onClick={() => setShowWindow(false)} className="close-button">&#10005;</button>
                 </div>
-                <ul className="window-options">
+                <ul className={styles.windowOptions}>
                     <li onClick={(e) => openModal(e, constants.modals.EDIT)}>Edit
                     </li>
                     <li onClick={(e) => openModal(e, constants.modals.DELETE)}>Delete

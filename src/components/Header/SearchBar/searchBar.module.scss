@@ -1,4 +1,4 @@
-.search-block {
+.searchBlock {
   padding: 0 80px;
   margin-top: 50px;
   h1 {
@@ -9,9 +9,9 @@
     text-transform: uppercase;
     margin: 0 0 50px
   }
-  .search-bar {
+  .searchBar {
     display: flex;
-    .search-query {
+    .searchQuery {
       color: var(--white);
       background-color: #323232CC;
       width: 70%;
@@ -33,7 +33,7 @@
       }
     }
   }
-  .search-button {
+  .searchButton {
     padding: 17px 73px;
     height: 59px;
     font-size: 20px;
