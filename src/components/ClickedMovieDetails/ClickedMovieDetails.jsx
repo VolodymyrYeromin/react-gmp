@@ -14,7 +14,7 @@ const transformDuration = (numberOfMinutes) => {
     return string;
 };
 
-const ClickedMovieDetails = () => {
+const ClickedMovieDetails = ({movie}) => {
     const selectedMovie = useSelector(state => state.selectedMovie.movie);
 
     return (
@@ -24,18 +24,18 @@ const ClickedMovieDetails = () => {
                 <button className="search-movie-btn" onClick={()=>{}}><Image src={searchImage} height={30} width={30} alt="search"/></button>
             </div>
             <div className={styles.movieDetailsBody}>
-                <img className={styles.movieDetailsImg} src={selectedMovie.poster_path} alt={selectedMovie.title}/>
+                <img className={styles.movieDetailsImg} src={movie.poster_path} alt={movie.title}/>
                 <div className={styles.movieDetailsInfo}>
                     <div className={styles.movieHeading}>
-                        <h2>{selectedMovie.title}</h2>
-                        <div className={styles.rating}>{selectedMovie.vote_average}</div>
+                        <h2>{movie.title}</h2>
+                        <div className={styles.rating}>{movie.vote_average}</div>
                     </div>
-                    <p className={styles.genres}>{selectedMovie.genres ? selectedMovie.genres.map((genre, index) => {
-                        return index < selectedMovie.genres.length - 1 ? `${genre}, ` : genre
+                    <p className={styles.genres}>{movie.genres ? movie.genres.map((genre, index) => {
+                        return index < movie.genres.length - 1 ? `${genre}, ` : genre
                     }) : null}</p>
-                    <span className={styles.year}>{selectedMovie.release_date ? selectedMovie.release_date.substring(0, 4) : null}</span>
-                    <span className={styles.length}>{transformDuration(selectedMovie.runtime)}</span>
-                    <div className={styles.description}>{selectedMovie.overview}</div>
+                    <span className={styles.year}>{movie.release_date ? movie.release_date.substring(0, 4) : null}</span>
+                    <span className={styles.length}>{transformDuration(movie.runtime)}</span>
+                    <div className={styles.description}>{movie.overview}</div>
                 </div>
             </div>
         </div>
