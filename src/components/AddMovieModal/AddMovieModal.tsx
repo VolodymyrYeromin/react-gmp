@@ -4,9 +4,10 @@ import {useFormik} from "formik";
 import * as Yup from "yup";
 import {createMovie} from "../../redux/features/movies/moviesSlice";
 import MovieForm from "../MovieForm/MovieForm";
+import {AppDispatch} from "../../redux/store";
 
 const AddMovieModal = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const formik = useFormik({
         initialValues: {
@@ -33,7 +34,7 @@ const AddMovieModal = () => {
                 formattedForm.release_date = values.release_date.toISOString().split('T')[0];
             }
             if (!values.vote_average) {
-                formattedForm.vote_average = 0;
+                formattedForm.vote_average = '0';
             }
             dispatch(createMovie(formattedForm));
         }

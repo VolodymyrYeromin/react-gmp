@@ -11,3 +11,5 @@ export const store = configureStore({
         selectedMovie: selectedMovieReducer,
     },
 });
+
+export type AppDispatch = typeof store.dispatch;

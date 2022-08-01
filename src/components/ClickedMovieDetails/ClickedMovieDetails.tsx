@@ -1,10 +1,11 @@
 import styles from "./clickedMovieDetails.module.scss"
 import searchImage from '../../../public/assets/SearchButton.png'
-import {useSelector} from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
+import {movieType} from "../../types";
+import {FC} from "react";
 
-const transformDuration = (numberOfMinutes) => {
+const transformDuration = (numberOfMinutes: number) : string => {
     let string = `${Math.floor(numberOfMinutes / 60)}h `;
     if (numberOfMinutes % 60 < 10) {
         string += `0${numberOfMinutes % 60} min`;
@@ -14,9 +15,7 @@ const transformDuration = (numberOfMinutes) => {
     return string;
 };
 
-const ClickedMovieDetails = ({movie}) => {
-    const selectedMovie = useSelector(state => state.selectedMovie.movie);
-
+const ClickedMovieDetails: FC<{movie: movieType}> = ({movie}) => {
     return (
         <div className={styles.clickedMovieDetails}>
             <div className={styles.movieDetailsHeader}>

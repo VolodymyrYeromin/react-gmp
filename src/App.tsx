@@ -5,9 +5,11 @@ import ClickedMovieDetails from "./components/ClickedMovieDetails/ClickedMovieDe
 import Modal from "./components/Modal/Modal";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
+import {FC} from "react";
+import {appProps, modalSliceType} from "./types";
 
-const App = ({movies, movie}) => {
-    const isModalOpen = useSelector(state => state.modal.isOpen);
+const App: FC<appProps> = ({movies, movie}) => {
+    const isModalOpen = useSelector<modalSliceType>(state => state.modal.isOpen);
     const nextRouter = useRouter();
 
     return (

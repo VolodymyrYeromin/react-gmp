@@ -1,17 +1,18 @@
-import PropTypes from "prop-types";
 import EditDeleteWindow from "../../../EditDeleteWindow/EditDeleteWindow";
 import Link from "next/link";
 import {useRouter} from "next/router";
+import {FC} from "react";
+import {movieType} from "../../../../types";
 
-const MovieCard = ({movie}) => {
+const MovieCard:FC<{movie: movieType}> = ({movie}) => {
     const {query} = useRouter();
     let href;
     if (query.filter) {
-        href = `${query.search ? `/search/${query.search}` : '/search'}?filter=${query.filter}${query.sortBy ? `&sortBy=${query.sortBy}` : ''}&movie=${movie.id}`;
+        href = `${query.searchQuery ? `/search/${query.searchQuery}` : '/search'}?filter=${query.filter}${query.sortBy ? `&sortBy=${query.sortBy}` : ''}&movie=${movie.id}`;
     } else if (query.sortBy) {
-        href = `${query.search ? `/search/${query.search}` : '/search'}?sortBy=${query.sortBy}&movie=${movie.id}`;
+        href = `${query.searchQuery ? `/search/${query.searchQuery}` : '/search'}?sortBy=${query.sortBy}&movie=${movie.id}`;
     } else {
-        href = `${query.search ? `/search/${query.search}` : '/search'}?movie=${movie.id}`;
+        href = `${query.searchQuery ? `/search/${query.searchQuery}` : '/search'}?movie=${movie.id}`;
     }
 
     return (
@@ -32,22 +33,5 @@ const MovieCard = ({movie}) => {
         </Link>
     )
 }
-
-MovieCard.propTypes = {
-    movie: PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            tagline: PropTypes.string,
-            vote_average: PropTypes.number.isRequired,
-            vote_count: PropTypes.number,
-            release_date: PropTypes.string.isRequired,
-            poster_path: PropTypes.string.isRequired,
-            overview: PropTypes.string.isRequired,
-            budget: PropTypes.number,
-            revenue: PropTypes.number,
-            runtime: PropTypes.number,
-            genres: PropTypes.arrayOf(PropTypes.string).isRequired
-        }
-    ),
-};
 
 export default MovieCard;

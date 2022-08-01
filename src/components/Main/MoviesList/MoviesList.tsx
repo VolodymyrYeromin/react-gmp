@@ -1,9 +1,9 @@
 import styles from './moviesList.module.scss';
 import MovieCard from "./MovieCard/MovieCard";
-import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {FC} from "react";
+import {moviesResponseType} from "../../../types";
 
-const MoviesList = ({movies}) => {
+const MoviesList:FC<{movies: moviesResponseType}> = ({movies}) => {
 
     return (
         <>
