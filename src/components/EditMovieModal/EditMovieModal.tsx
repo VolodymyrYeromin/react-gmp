@@ -3,10 +3,13 @@ import {useFormik} from "formik";
 import * as Yup from "yup";
 import {updateMovie} from "../../redux/features/movies/moviesSlice";
 import MovieForm from "../MovieForm/MovieForm";
+import {AppDispatch} from "../../redux/store";
+import {editMovieType, modalSliceType} from "../../types";
+import {FC} from "react";
 
-const EditMovieModal = () => {
-    const movie = useSelector(state => state.modal.chosenMovie)
-    const dispatch = useDispatch();
+const EditMovieModal: FC = () => {
+    const movie : editMovieType = useSelector<modalSliceType>(state => state.modal.chosenMovie)
+    const dispatch = useDispatch<AppDispatch>();
 
     const formik = useFormik({
         initialValues: {
@@ -15,7 +18,7 @@ const EditMovieModal = () => {
             poster_path: movie.poster_path,
             vote_average: movie.vote_average,
             genres: movie.genres,
-            runtime: movie.runtime || '',
+            runtime: movie.runtime || 0,
             overview: movie.overview,
             id: movie.id
         },

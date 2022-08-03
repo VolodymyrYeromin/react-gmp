@@ -1,13 +1,14 @@
 import styles from './editDeleteWindow.module.scss'
 import {useDispatch} from "react-redux";
 import {setChosenMovie, setModal} from "../../redux/features/modal/modalSlice";
-import PropTypes from "prop-types";
 import constants from "../../constants";
-import {useState} from "react";
+import {FC, useState} from "react";
+import {movieType} from "../../types";
+import {AppDispatch} from "../../redux/store";
 
-const EditDeleteWindow = ({movie}) => {
-    const [showWindow, setShowWindow] = useState(false);
-    const dispatch = useDispatch();
+const EditDeleteWindow: FC<{movie: movieType}> = ({movie}) => {
+    const [showWindow, setShowWindow] = useState<boolean>(false);
+    const dispatch = useDispatch<AppDispatch>();
 
     const openModal = (e, modalName) => {
         e.stopPropagation();
@@ -39,22 +40,6 @@ const EditDeleteWindow = ({movie}) => {
             </div>}
         </>
     );
-};
-
-EditDeleteWindow.propTypes = {
-    movie: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        tagline: PropTypes.string,
-        vote_average: PropTypes.number.isRequired,
-        vote_count: PropTypes.number,
-        release_date: PropTypes.string.isRequired,
-        poster_path: PropTypes.string.isRequired,
-        overview: PropTypes.string.isRequired,
-        budget: PropTypes.number,
-        revenue: PropTypes.number,
-        runtime: PropTypes.number,
-        genres: PropTypes.arrayOf(PropTypes.string).isRequired
-    })
 };
 
 export default EditDeleteWindow;

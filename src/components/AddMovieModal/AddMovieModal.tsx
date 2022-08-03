@@ -5,8 +5,9 @@ import * as Yup from "yup";
 import {createMovie} from "../../redux/features/movies/moviesSlice";
 import MovieForm from "../MovieForm/MovieForm";
 import {AppDispatch} from "../../redux/store";
+import {FC} from "react";
 
-const AddMovieModal = () => {
+const AddMovieModal: FC = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const formik = useFormik({
@@ -14,9 +15,9 @@ const AddMovieModal = () => {
             title: '',
             release_date: null,
             poster_path: '',
-            vote_average: '',
+            vote_average: 0,
             genres: [],
-            runtime: '',
+            runtime: 0,
             overview: ''
         },
         validationSchema: Yup.object({
@@ -34,7 +35,7 @@ const AddMovieModal = () => {
                 formattedForm.release_date = values.release_date.toISOString().split('T')[0];
             }
             if (!values.vote_average) {
-                formattedForm.vote_average = '0';
+                formattedForm.vote_average = 0;
             }
             dispatch(createMovie(formattedForm));
         }

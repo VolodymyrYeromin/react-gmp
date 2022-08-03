@@ -3,6 +3,7 @@ import {useFormik} from "formik";
 import {useRouter} from "next/router";
 import {FC} from "react";
 import useCustomNavigation from "../../../hooks/useCustomNavigation"
+
 const SearchBar:FC = () => {
     const nextRouter = useRouter();
     const formik = useFormik({

@@ -8,7 +8,7 @@ export interface movieType {
     overview: string,
     budget?: number,
     revenue?: number,
-    runtime?: number | string,
+    runtime?: number,
     genres: string[],
     id?: number
 }
@@ -48,4 +48,16 @@ export type moviesResponseType = {
     limit: number,
     offset: number,
     totalAmount: number
+}
+
+export interface editMovieType {
+    title?: string,
+    vote_average?: number | string,
+    release_date?: any,
+    // release_date?: string | Date, doesn't work????
+    poster_path?: string,
+    overview?: string,
+    runtime?: number,
+    genres?: string[],
+    id?: number
 }

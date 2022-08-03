@@ -1,10 +1,13 @@
 import styles from "./deleteMovieModal.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteMovieFromAPI} from "../../redux/features/movies/moviesSlice";
+import {FC} from "react";
+import {modalSliceType} from "../../types";
+import {AppDispatch} from "../../redux/store";
 
-const DeleteMovieModal = () => {
-    const dispatch = useDispatch();
-    const {id} = useSelector(state => state.modal.chosenMovie);
+const DeleteMovieModal: FC = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const {id} : { id? : number } = useSelector<modalSliceType>(state => state.modal.chosenMovie);
 
     const deleteMovie = (e) => {
         e.preventDefault();

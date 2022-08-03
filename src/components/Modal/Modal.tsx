@@ -7,9 +7,10 @@ import {setModal} from "../../redux/features/modal/modalSlice";
 import constants from "../../constants";
 import {FC} from "react";
 import {modalSliceType} from "../../types";
+import {AppDispatch} from "../../redux/store";
 
 const Modal:FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const { openedModal } : { openedModal? : string } = useSelector<modalSliceType>(state => state.modal);
     const closeModal = () => dispatch(setModal(constants.modals.CLOSE));
 

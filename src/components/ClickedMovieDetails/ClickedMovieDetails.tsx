@@ -5,7 +5,7 @@ import Image from "next/image";
 import {movieType} from "../../types";
 import {FC} from "react";
 
-const transformDuration = (numberOfMinutes: number) : string => {
+const transformDuration = (numberOfMinutes: number ) : string => {
     let string = `${Math.floor(numberOfMinutes / 60)}h `;
     if (numberOfMinutes % 60 < 10) {
         string += `0${numberOfMinutes % 60} min`;

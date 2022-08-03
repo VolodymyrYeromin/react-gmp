@@ -5,9 +5,10 @@ import {setModal} from "../../redux/features/modal/modalSlice";
 import constants from "../../constants";
 import Link from "next/link";
 import {FC} from "react";
+import {AppDispatch} from "../../redux/store";
 
 const Header: FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const openAddModal = () => {
         dispatch(setModal(constants.modals.ADD));
     }
