@@ -1,23 +1,24 @@
-import {useDispatch, useSelector} from "react-redux";
+import "./addMovieModal.module.scss";
+import {useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import * as Yup from "yup";
-import {updateMovie} from "../../redux/features/movies/moviesSlice";
+import {createMovie} from "../../redux/features/movies/moviesSlice";
 import MovieForm from "../MovieForm/MovieForm";
+import {AppDispatch} from "../../redux/store";
+import {FC} from "react";
 
-const EditMovieModal = () => {
-    const movie = useSelector(state => state.modal.chosenMovie)
-    const dispatch = useDispatch();
+const AddMovieModal: FC = () => {
+    const dispatch = useDispatch<AppDispatch>();
 
     const formik = useFormik({
         initialValues: {
-            title: movie.title,
-            release_date: movie.release_date,
-            poster_path: movie.poster_path,
-            vote_average: movie.vote_average,
-            genres: movie.genres,
-            runtime: movie.runtime || '',
-            overview: movie.overview,
-            id: movie.id
+            title: '',
+            release_date: null,
+            poster_path: '',
+            vote_average: 0,
+            genres: [],
+            runtime: 0,
+            overview: ''
         },
         validationSchema: Yup.object({
             title: Yup.string().required("Required"),
@@ -30,24 +31,21 @@ const EditMovieModal = () => {
         }),
         onSubmit: (values) => {
             const formattedForm = values;
-            if (typeof(values.release_date) === 'object') {
+            if (values.release_date) {
                 formattedForm.release_date = values.release_date.toISOString().split('T')[0];
-            } else {
-                formattedForm.release_date = values.release_date;
             }
             if (!values.vote_average) {
                 formattedForm.vote_average = 0;
             }
-            dispatch(updateMovie(formattedForm));
+            dispatch(createMovie(formattedForm));
         }
     })
-
     return (
-        <div className="edit-movie-content">
-                <h2>Edit movie</h2>
-                <MovieForm formik={formik}/>
+        <div className="add-movie-content">
+            <h2>Add movie</h2>
+            <MovieForm formik={formik} />
         </div>
     );
 };
 
-export default EditMovieModal;
+export default AddMovieModal;

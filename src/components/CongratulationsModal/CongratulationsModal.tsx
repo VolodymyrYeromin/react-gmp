@@ -1,6 +1,7 @@
 import styles from "./CongratulationsModal.module.scss";
+import {FC} from "react";
 
-const CongratulationsModal = () => {
+const CongratulationsModal: FC = () => {
     return (
         <div className={styles.congratulationsModal}>
             <div className={styles.checkmark}>

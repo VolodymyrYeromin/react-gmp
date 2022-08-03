@@ -1,7 +1,7 @@
-
 import NotFound from "../src/components/NotFound/NotFound";
+import {FC} from "react";
 
-function PageNotFound() {
+const PageNotFound: FC = () => {
     return (
         <NotFound />
     )

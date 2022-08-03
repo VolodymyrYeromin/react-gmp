@@ -1,8 +1,9 @@
 import styles from './moviesFilterBar.module.scss';
 import constants from "../../../constants";
 import {useRouter} from "next/router";
+import {FC} from "react";
 
-const MoviesFilterBar = () => {
+const MoviesFilterBar:FC = () => {
     const categoriesArray = constants.genres;
     const nextRouter = useRouter();
 

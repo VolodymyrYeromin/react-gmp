@@ -1,16 +1,18 @@
 import styles from "./searchBar.module.scss";
 import {useFormik} from "formik";
 import {useRouter} from "next/router";
+import {FC} from "react";
+import useCustomNavigation from "../../../hooks/useCustomNavigation"
 
-const SearchBar = () => {
+const SearchBar:FC = () => {
     const nextRouter = useRouter();
     const formik = useFormik({
         initialValues: {
-            search_query: nextRouter.query.search ? nextRouter.query.search : ''
+            search_query: nextRouter.query.searchQuery ? nextRouter.query.searchQuery : ''
         },
-        // onSubmit: (values) => {
-        //     useCustomNavigation({navigate, searchQuery: values.search_query, genre, sortBy});
-        // }
+        onSubmit: (values) => {
+            useCustomNavigation({navigate: nextRouter.push, searchQuery: values.search_query, genre: nextRouter.query.genre, sortBy: nextRouter.query.sortBy, movie: nextRouter.query.movie});
+        }
     })
 
     return (

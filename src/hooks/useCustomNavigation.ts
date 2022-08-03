@@ -1,4 +1,6 @@
-const useCustomNavigation = ({navigate, searchQuery, genre, sortBy, movie}) => {
+import {customNavigationType} from "../types";
+
+const useCustomNavigation = ({navigate, searchQuery, genre, sortBy, movie}: customNavigationType) : void => {
     if (genre) {
         navigate(`${searchQuery ? `/search/${searchQuery}` : '/search'}?genre=${genre}${sortBy ? `&sortBy=${sortBy}` : ''}${movie ? `&movie=${movie}` : ''}`);
     } else if (sortBy) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {TextField, ThemeProvider} from "@mui/material";
 import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import MultipleSelectCheckmarks from "../MultipleSelectCheckmarks/MultipleSelectCheckmarks";
@@ -6,6 +6,8 @@ import {setModal} from "../../redux/features/modal/modalSlice";
 import constants from "../../constants";
 import {useDispatch} from "react-redux";
 import {createTheme} from "@mui/material/styles";
+import {movieType} from "../../types";
+import {FormikProps} from "formik";
 
 const theme = createTheme({
     palette: {
@@ -14,8 +16,9 @@ const theme = createTheme({
         },
     },
 });
+type FormValues = movieType;
 
-const MovieForm = ({formik}) => {
+const MovieForm: FC<{formik: FormikProps<FormValues>}> = ({formik}) => {
     const dispatch = useDispatch();
     const closeModal = () => {
         dispatch(setModal(constants.modals.CLOSE));
@@ -31,7 +34,7 @@ const MovieForm = ({formik}) => {
                     {formik.touched.title && formik.errors.title ? <span className="validation">{formik.errors.title}</span> : null}
                 </div>
                 <div className="validated">
-                    <BasicDatePicker id="date" name="release_date" form={formik} callback={formik.setFieldValue} onBlur={formik.handleBlur}/>
+                    <BasicDatePicker name="release_date" form={formik} callback={formik.setFieldValue} onBlur={formik.handleBlur}/>
                     {formik.touched.release_date && formik.errors.release_date ? <span className="validation">{formik.errors.release_date}</span> : null}
                 </div>
                 <div className="validated">
@@ -47,7 +50,7 @@ const MovieForm = ({formik}) => {
                     {formik.touched.vote_average && formik.errors.vote_average ? <span className="validation">{formik.errors.vote_average}</span> : null}
                 </div>
                 <div className="validated">
-                    <MultipleSelectCheckmarks name="genres" id="genres" form={formik} callback={formik.setFieldValue} onBlur={formik.handleBlur}/>
+                    <MultipleSelectCheckmarks name="genres" form={formik} callback={formik.setFieldValue} onBlur={formik.handleBlur}/>
                     {formik.touched.genres && formik.errors.genres ? <span className="validation">{formik.errors.genres}</span> : null}
                 </div>
                 <div className="validated">

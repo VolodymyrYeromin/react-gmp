@@ -4,7 +4,7 @@ import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 
-export default function BasicDatePicker({form, callback, name, onBlur}) {
+const BasicDatePicker = ({form, callback, name, onBlur}) => {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -21,3 +21,5 @@ export default function BasicDatePicker({form, callback, name, onBlur}) {
         </LocalizationProvider>
     );
 }
+
+export default BasicDatePicker;
