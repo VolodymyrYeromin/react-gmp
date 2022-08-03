@@ -1,4 +1,4 @@
-.edit-delete-window {
+.editDeleteWindow {
   width: 150px;
   position: absolute;
   top: 10px;
@@ -8,7 +8,7 @@
   font-weight: 300;
   font-size: 16px;
   padding: 5px 0;
-  .window-header {
+  .windowHeader {
     width: calc(100% - 10px) ;
     display: flex;
     justify-content: flex-end;
@@ -20,7 +20,7 @@
       border: none;
     }
   }
-  .window-options {
+  .windowOptions {
     list-style-type: none;
     padding: 0;
     margin: 0;

@@ -1,44 +1,24 @@
-import "./searchBar.scss";
+import styles from "./searchBar.module.scss";
 import {useFormik} from "formik";
-import {useDispatch} from "react-redux";
-import {getMovies} from "../../../redux/features/movies/moviesSlice";
-import {useNavigate, useParams} from "react-router-dom";
-import useQuery from "../../../hooks/useQuery";
-import constants from "../../../constants";
-import useDidMountEffect from "../../../hooks/useDidMountEffect";
-import useCustomNavigation from "../../../hooks/useCustomNavigation";
-import {useEffect} from "react";
+import {useRouter} from "next/router";
 
 const SearchBar = () => {
-    const {searchQuery} = useParams();
-    const navigate = useNavigate();
-    const query = useQuery();
-    const sortBy = query.get(constants.queryParams.SORT_BY);
-    const genre = query.get(constants.queryParams.GENRE);
-
-    const dispatch = useDispatch();
+    const nextRouter = useRouter();
     const formik = useFormik({
         initialValues: {
-            search_query: ''
+            search_query: nextRouter.query.search ? nextRouter.query.search : ''
         },
-        onSubmit: (values) => {
-            useCustomNavigation({navigate, searchQuery: values.search_query, genre, sortBy});
-        }
+        // onSubmit: (values) => {
+        //     useCustomNavigation({navigate, searchQuery: values.search_query, genre, sortBy});
+        // }
     })
-    useDidMountEffect(() => {
-        dispatch(getMovies({searchQuery, sorting: sortBy, filtering: genre}));
-    }, [searchQuery]);
-
-    useEffect(() => {
-        formik.setFieldValue('search_query', searchQuery ? searchQuery : '', false);
-    }, []);
 
     return (
-        <div className="search-block" data-testid="search-block">
+        <div className={styles.searchBlock} data-testid="search-block">
             <h1>Find your movie</h1>
-            <form onSubmit={formik.handleSubmit} className="search-bar">
-                <input className="search-query" name="search_query" type="text" placeholder="What do you want to watch?" value={formik.values.search_query} onChange={formik.handleChange} data-testid="search-input"/>
-                <input className="search-button" type="submit" value="Search" data-testid="search-button"/>
+            <form onSubmit={formik.handleSubmit} className={styles.searchBar}>
+                <input className={styles.searchQuery} name="search_query" type="text" placeholder="What do you want to watch?" value={formik.values.search_query} onChange={formik.handleChange} data-testid="search-input"/>
+                <input className={styles.searchButton} type="submit" value="Search" data-testid="search-button"/>
             </form>
         </div>
     );

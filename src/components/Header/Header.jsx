@@ -1,9 +1,9 @@
-import "./header.scss";
-import {Link} from "react-router-dom";
+import "./header.module.scss";
 import SearchBar from "./SearchBar/SearchBar";
 import {useDispatch} from "react-redux";
 import {setModal} from "../../redux/features/modal/modalSlice";
 import constants from "../../constants";
+import Link from "next/link";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Header = () => {
     return (
         <header>
             <div className="header-top">
-                <Link to="/" className="logo"><span className="bold">netflix</span>roulette</Link>
+                <Link href="/"><a className="logo"><span className="bold">netflix</span>roulette</a></Link>
                 <button className="add-movie-btn" onClick={openAddModal}>+ Add movie</button>
             </div>
             <SearchBar />

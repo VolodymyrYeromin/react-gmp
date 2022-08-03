@@ -1,4 +1,3 @@
-import "./modal.scss";
 import AddMovieModal from "../AddMovieModal/AddMovieModal";
 import EditMovieModal from "../EditMovieModal/EditMovieModal";
 import DeleteMovieModal from "../DeleteMovieModal/DeleteMovieModal";

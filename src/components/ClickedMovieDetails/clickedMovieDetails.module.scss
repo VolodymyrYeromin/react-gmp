@@ -1,7 +1,7 @@
-.clicked-movie-details {
+.clickedMovieDetails {
   padding: 20px 60px;
 }
-.movie-details-header {
+.movieDetailsHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,19 +14,19 @@
     cursor: pointer;
   }
 }
-.movie-details-body {
+.movieDetailsBody {
   display: flex;
 }
-.movie-details-img {
+.movieDetailsImg {
   width: 323px;
   min-width: 323px;
   min-height: 455px;
   height: 455px;
   color: var(--white);
 }
-.movie-details-info {
+.movieDetailsInfo {
   margin-left: 60px;
-  .movie-heading {
+  .movieHeading {
     align-items: center;
     justify-content: flex-start;
   }

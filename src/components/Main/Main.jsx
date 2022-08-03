@@ -1,19 +1,19 @@
-import './main.scss';
+import styles from './main.module.scss';
 import MoviesFilterBar from "./MoviesFilterBar/MoviesFilterBar";
 import MoviesSortBar from "./MoviesSortBar/MoviesSortBar";
 import MoviesList from "./MoviesList/MoviesList";
 import ErrorBoundary from "./ErrorBoundary";
 
-const Main = () => {
+const Main = ({movies}) => {
 
     return (
         <main>
-            <div className="main-heading">
+            <div className={styles.mainHeading}>
                 <MoviesFilterBar />
                 <MoviesSortBar />
             </div>
             <ErrorBoundary>
-                <MoviesList />
+                <MoviesList movies={movies} />
             </ErrorBoundary>
         </main>
     )

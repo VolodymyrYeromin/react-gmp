@@ -1,4 +1,4 @@
-import "./deleteMovieModal.scss";
+import styles from "./deleteMovieModal.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteMovieFromAPI} from "../../redux/features/movies/moviesSlice";
 
@@ -12,7 +12,7 @@ const DeleteMovieModal = () => {
     }
 
     return (
-        <div className="delete-movie-content">
+        <div className={styles.deleteMovieContent}>
             <h2>Delete movie</h2>
             <p>Are you sure you want to delete this movie?</p>
             <button onClick={deleteMovie}>Confirm</button>

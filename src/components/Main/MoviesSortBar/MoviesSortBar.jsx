@@ -1,47 +1,21 @@
-import './moviesSortBar.scss';
+import styles from './moviesSortBar.module.scss';
 import {useRef} from "react";
-import {useDispatch} from "react-redux";
-import {getMovies} from "../../../redux/features/movies/moviesSlice";
 import constants from "../../../constants";
-import useQuery from "../../../hooks/useQuery";
-import {useNavigate, useParams} from "react-router-dom";
-import useDidMountEffect from "../../../hooks/useDidMountEffect";
-import useCustomNavigation from "../../../hooks/useCustomNavigation";
+import {useRouter} from "next/router";
 
 const MoviesSortBar = () => {
-    const dispatch = useDispatch();
     const selectRef = useRef(null);
-
-    const navigate = useNavigate();
-    const {searchQuery} = useParams();
-    const query = useQuery();
-    const sortBy = query.get(constants.queryParams.SORT_BY);
-    const genre = query.get(constants.queryParams.GENRE);
-    const movie = query.get(constants.queryParams.MOVIE);
-
-    useDidMountEffect(() => {
-        if (sortBy) {
-            dispatch(getMovies({searchQuery, sorting: sortBy, filtering: genre}));
-        }
-    }, [sortBy])
-
-    const sortMovies = () => {
-        useCustomNavigation({navigate, searchQuery, genre, sortBy: selectRef.current.value, movie});
-    }
+    const nextRouter = useRouter();
 
     return (
-        <div className="movies-sort-bar">
+        <div className={styles.moviesSortBar}>
             <span>
                 Sort by
             </span>
-            <div className="select_box">
-                <select ref={selectRef} onChange={sortMovies}>
+            <div className={styles.selectBox}>
+                <select ref={selectRef} onChange={()=>{}} defaultValue={nextRouter.query.sorting}>
                     {constants.sorting.map(sorting => {
-                        if (sortBy === sorting.value) {
-                            return <option key={sorting.value} value={sorting.value} selected>{sorting.title}</option>
-                        } else {
-                            return <option key={sorting.value} value={sorting.value}>{sorting.title}</option>
-                        }
+                         return <option key={sorting.value} value={sorting.value}>{sorting.title}</option>
                     })}
                 </select>
             </div>
